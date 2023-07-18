@@ -5,7 +5,7 @@ API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'
  
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
-menu = processorMenu("config_ru.json")
+menu = processorMenu("config_ru.jsonc")
  
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
