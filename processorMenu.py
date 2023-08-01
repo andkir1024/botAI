@@ -24,3 +24,5 @@ class processorMenu:
         await message.reply("Привет!\nЯ Эхо-бот\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
         
         return
+    async def createMenu(self, menuId):
+        return
