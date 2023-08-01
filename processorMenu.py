@@ -5,6 +5,7 @@ from jsoncomment import JsonComment
 
 # import jsoncomment
 from aiogram import Bot, Dispatcher, executor, types
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from userDB import *
 
 class processorMenu:
@@ -22,7 +23,23 @@ class processorMenu:
         user = users.getUserInfo(message.chat.id)
         await message.reply(str(message.chat.id))
         await message.reply("Привет!\nЯ Эхо-бот\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
+        await self.createMenu(1000, message)
         
         return
-    async def createMenu(self, menuId):
+    async def createMenu(self, menuId, message):
+        kb = [
+            [
+                types.KeyboardButton(text="Сможешь повторить это?"),
+                types.KeyboardButton(text="А это?")
+            ],
+        ]
+        keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+ 
+        await message.reply("Привет!\nЯ Эхобот от Skillbox!\nОтправь мне любое сообщение, а я тебе обязательно отвечу.", reply_markup=keyboard)        
+        
+        # button1 = InlineKeyboardButton(text="button1", callback_data="In_First_button")
+        # button2 = InlineKeyboardButton(text="button2", callback_data="In_Second_button")
+        # keyboard_inline = InlineKeyboardMarkup().add(button1, button2)
+        # await message.reply("hi! how are you", reply_markup=keyboard_inline)
+        
         return
