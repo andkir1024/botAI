@@ -5,12 +5,17 @@ import enum
 
 class mainConst():
     DB_TEST = True
-class TypeСutout(enum.Enum):
+class userRight(enum.Enum):
     undifined = 0
-    UType0 = 1
-    UType1 = 2
-    UType2 = 3
-    UType3 = 4
+    admin = 1
+    worker = 2
+    user = 3
+
+class userTheme(enum.Enum):
+    undifined = 0
+    theme0 = 1
+    theme1 = 2
+    theme2 = 3
 
 class user:
     id : int
@@ -18,9 +23,13 @@ class user:
     first_name : str
     last_name : str
     mode : int
+    right : userRight
+    theme : userTheme
     def __init__(self):
-        id = 1335723885
-        phone = '89218866929'
-        first_name = 'Андрей'
-        last_name = 'Кирилов'
-        mode = -1
+        self.id = 1335723885
+        self.phone = '89218866929'
+        self.first_name = 'Андрей'
+        self.last_name = 'Кирилов'
+        self.mode = -1
+        self.right = userRight.admin
+        self.theme = userTheme.theme0
