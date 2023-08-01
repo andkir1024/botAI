@@ -18,8 +18,8 @@ class processorMenu:
         # user.getUserInfo(1000)
         return
     async def doMenu(self, message):
-        user = userDB(True)
-        user.getUserInfo(message.chat.id)
+        users = userDB(True)
+        user = users.getUserInfo(message.chat.id)
         await message.reply(str(message.chat.id))
         await message.reply("Привет!\nЯ Эхо-бот\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
         
