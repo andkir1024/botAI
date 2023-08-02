@@ -12,11 +12,11 @@ class userRight(enum.Enum):
     worker = 2
     user = 3
 
-class userTheme(enum.Enum):
+class userAssistant(enum.Enum):
     undifined = 0
-    theme0 = 1
-    theme1 = 2
-    theme2 = 3
+    assistant0 = 1
+    assistant1 = 2
+    assistant2 = 3
 
 class user:
     id : int
@@ -25,7 +25,7 @@ class user:
     last_name : str
     mode : int
     right : userRight
-    theme : userTheme
+    assistant : userAssistant
     def __init__(self):
         self.id = 1335723885
         self.phone = '89218866929'
@@ -33,4 +33,4 @@ class user:
         self.last_name = 'Кирилов'
         self.mode = -1
         self.right = userRight.admin
-        self.theme = userTheme.theme0
+        self.assistant = userAssistant.assistant0
