@@ -1,9 +1,9 @@
 from aiogram import Bot, Dispatcher, executor, types
 from processorMenu import *
  
-API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'
+# API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'
  
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=mainConst.API_TOKEN)
 dp = Dispatcher(bot)
 menu = processorMenu("config_ru.jsonc")
  

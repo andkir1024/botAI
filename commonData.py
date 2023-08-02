@@ -4,6 +4,7 @@
 import enum
 
 class mainConst():
+    API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'    
     DB_TEST = True
 class userRight(enum.Enum):
     undifined = 0
