@@ -30,6 +30,14 @@ class processorMenu:
         return
     
     def get_kb() -> ReplyKeyboardMarkup:
+        kb_clients = ReplyKeyboardMarkup()
+        b1 = KeyboardButton('say 1 Z')
+        b2 = KeyboardButton('say 2 Z')
+        b3 = KeyboardButton('say 3 Z')
+        kb_clients.add(b1).add(b2).add(b3)
+        return kb_clients
+        
+    def get_kb_old() -> ReplyKeyboardMarkup:
         # kb = ReplyKeyboardMarkup([
         #     [KeyboardButton('kb0'),KeyboardButton('kb1'),KeyboardButton('kb2')],
         #     [KeyboardButton('kb3'),KeyboardButton('kb4'),KeyboardButton('kb5')],
@@ -37,9 +45,9 @@ class processorMenu:
         # ])
 
         kb = ReplyKeyboardMarkup()
-        b1 = KeyboardButton('say 1')
-        b2 = KeyboardButton('say 2')
-        b3 = KeyboardButton('say 3')
+        b1 = KeyboardButton('say 1 Z')
+        b2 = KeyboardButton('say 2 Z')
+        b3 = KeyboardButton('say 3 Z')
         kb.add(b1).add(b2).add(b3)
         return kb
     
