@@ -28,6 +28,21 @@ class processorMenu:
         await self.createMenu(1000, message)
         
         return
+    
+    def get_kb() -> ReplyKeyboardMarkup:
+        # kb = ReplyKeyboardMarkup([
+        #     [KeyboardButton('kb0'),KeyboardButton('kb1'),KeyboardButton('kb2')],
+        #     [KeyboardButton('kb3'),KeyboardButton('kb4'),KeyboardButton('kb5')],
+        #     [KeyboardButton('kb6'),KeyboardButton('kb7'),KeyboardButton('kb8')],
+        # ])
+
+        kb = ReplyKeyboardMarkup()
+        b1 = KeyboardButton('say 1')
+        b2 = KeyboardButton('say 2')
+        b3 = KeyboardButton('say 3')
+        kb.add(b1).add(b2).add(b3)
+        return kb
+    
     async def createMenu(self, menuId, message):
         button_hi = KeyboardButton('Привет! 👋')
 

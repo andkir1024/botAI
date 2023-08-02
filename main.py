@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
 from processorMenu import *
- 
+from kbs import kb_clients
 # API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'
  
 bot = Bot(token=mainConst.API_TOKEN)
@@ -8,8 +8,17 @@ dp = Dispatcher(bot)
 menu = processorMenu("config_ru.jsonc")
  
 @dp.message_handler(commands=['start'])
-async def send_welcome(message: types.Message):
-   await menu.doMenu(message)
+async def cmd_start(msg: types.Message) -> None:
+    await msg.answer('Text', reply_markup=kb_clients)
+
+
+@dp.message_handler(commands=['cancel'])
+async def cmd_cancel(msg: types.Message) -> None:
+    await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
+     
+# @dp.message_handler(commands=['start'])
+# async def send_welcome(message: types.Message):
+#    await menu.doMenu(message)
    # await message.reply("Привет!\nЯ Эхо-бот\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
  
 @dp.message_handler()
