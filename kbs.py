@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 class kb:
-    def get_kb(menu) -> ReplyKeyboardMarkup:
+    def get_kb(menu, msg) -> ReplyKeyboardMarkup:
         kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
         b1 = KeyboardButton('say 1')
         b2 = KeyboardButton('say 2', request_contact=True)
