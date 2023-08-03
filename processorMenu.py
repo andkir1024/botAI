@@ -51,3 +51,19 @@ class processorMenu:
         # await message.reply("hi! how are you", reply_markup=keyboard_inline)
         
         return greet_kb
+    
+    def getAssisitans(self, typeBotTest, answerTest, assistance):
+        typeBotTest = typeBotTest.lower()
+        answerTest = answerTest.lower()
+        assistants = self.parsed_object['assistant']
+        for ass in assistants:
+            if typeBotTest == ass['typeBot'].lower():
+                answers = ass['answers']
+                for answer in answers:
+                    if answerTest == answer['id'].lower():
+                        text = answer['text']
+                        lenText = len(text)
+                        if assistance < lenText:
+                            return text[str(assistance)]
+                        return text['0']
+        return None
