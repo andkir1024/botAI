@@ -6,6 +6,8 @@ import enum
 class mainConst():
     API_TOKEN = '6232440369:AAG-bS18nYh-cXVUWrMKham3mP6OTjTaw4k'    
     DB_TEST = True
+    OKDESK_TOKEN = 'api_token=ae71c1f696464efe94383d6acf37fa031b1848fb'
+    
 class userRight(enum.Enum):
     undifined = 0
     admin = 1

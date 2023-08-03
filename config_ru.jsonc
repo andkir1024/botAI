@@ -393,6 +393,43 @@
 		// главное меню появляется при начале работы
 		{
 			"id":"Start",
+			"title":"Выбор типа заявки",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Номер плоттера",
+					"next":"start"
+				},
+				{
+					"name":"Фотография QR кода плоттера",
+					"next":"start"
+				},
+				{
+					"name":"Код торговой точки",
+					"next":"start"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		{
+			"id":"Start0",
+			"type":"andy_problem",
+			"title":"answer2",
+			"role":"admin",
+			"typeBot":"base",
+			"kb":"reply",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"Start"
+				}
+			]
+		},
+		{
+			"id":"Start1",
 			"type":"andy_problem",
 			"title":"Начало",
 			"role":"admin",

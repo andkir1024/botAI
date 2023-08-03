@@ -75,12 +75,12 @@ class processorMenu:
             return msg
         return msg
     
-    def getMenu(self, msgCmd):
+    def getMenu(self, msgCmd, msgMain: types.Message):
         try:
             msgCmd = msgCmd.lower()
             menus = self.parsed_object['menus']
             for menu in menus:
-                if menu['id11'].lower() == msgCmd:
+                if menu['id'].lower() == msgCmd:
                     menuCmd = menu['menu']
                     typeBot = menu['typeBot']
                     title = self.testMsg(typeBot, menu['title'], 0)
@@ -100,6 +100,7 @@ class processorMenu:
                     return kb_clients , title
 
         except Exception as e:
+            msgMain.answer(str(e))
             return None, None
             
         return None, None

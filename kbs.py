@@ -2,13 +2,13 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from processorMenu import *
 
 class kbs:
-    def get_kb(menu, msg) -> ReplyKeyboardMarkup:
+    def get_kb(menu, msg: types.Message) -> ReplyKeyboardMarkup:
         msgCmd = msg.text
         first = msgCmd[0]
         if first == '/':
             msgCmd = msgCmd[1:]
             pass
-        menuReply, title = menu.getMenu(msgCmd)
+        menuReply, title = menu.getMenu(msgCmd, msg)
         return menuReply, title
             
         kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
