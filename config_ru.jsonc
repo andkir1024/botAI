@@ -1,129 +1,24 @@
 {
-	"lang":[
+	"assistant":[
 		{
-			"id":"DeviceNotFound",
-			"trans":"Оборудование не найдено. Повторите!"
+			"id":"answer0",
+			"ans0":"answer0",
+			"ans1":"answer0",
+			"ans2":"answer0"
 		},
 		{
-			"id":"PointNotFound",
-			"trans":"Торговая точка не найдена. Повторите!"
+			"id":"answer1",
+			"ans0":"answer0",
+			"ans1":"answer0",
+			"ans2":"answer0"
 		},
 		{
-			"id":"AddCommentExternal",
-			"trans":"Добаваление к заявке"
-		},
-		{
-			"id":"NoComment",
-			"trans":"Добавлен файл"
-		},
-		{
-			"id":"last_name",
-			"trans":"Фамилия: "
-		},
-		{
-			"id":"msg_request0",
-			"trans":"Заявка №"
-		},
-		{
-			"id":"msg_request1",
-			"trans":"за установленное время не взята в работу"
-		},
-		{
-			"id":"msg_request2",
-			"trans":"за установленное время не решена"
-		},
-		{
-			"id":"you_request",
-			"trans":"Ваше обращение переводится на специалиста технической поддержки."
-		},
-		{
-			"id":"first_name",
-			"trans":"Имя: "
-		},
-		{
-			"id":"WrongName",
-			"trans":"Отсутствует имя или фамилия. Добавьте его в свой телеграмм"
-		},
-		{
-			"id":"NoRequestes",
-			"trans":"Заявки отсутствуют"
-		},
-		{
-			"id":"EndOfAddingComment",
-			"trans":"Пользователь завершил обращение ¦"
-		},
-		{
-			"id":"WrongAddingComment",
-			"trans":"Заявка отсутствует (удалена или закрыта)555"
-		},
-		{
-			"id":"EnterPhoneNumber",
-			"trans":"Введите ваш номер телефона (8xxxyyyyyyy)"
-		},
-		{
-			"id":"OkPhoneNumber",
-			"trans":"Ваш номер запомнен (Для смены номера наберите /init)"
-		},
-		{
-			"id":"WrongPhoneNumber",
-			"trans":"Это неправильный номер. Введите ваш номер телефона (8xxxyyyyyyy)"
-		},
-		{
-			"id":"UnrecognizedCommand",
-			"trans":"Непонятная команда!1"
-		},
-		{
-			"id":"UnrecognizedCommand2",
-			"trans":"Непонятная команда!2"
-		},
-		{
-			"id":"EnterAnyComment",
-			"trans":"Введите хотя бы один комментарий"
-		},
-		{
-			"id":"CreatededRequestes",
-			"trans":"Существующие заявки:"
-		},
-		{
-			"id":"AddComment",
-			"trans":"Вы добавляете комментарии в заявку №:"
-		},
-		{
-			"id":"AddedComment",
-			"trans":"Вы добавили комментарии в заявку №:"
-		},
-		{
-			"id":"AddTimeReplyComentIsOver",
-			"trans":"Время ответа на комментарий превышено"
-		},
-		{
-			"id":"Request",
-			"trans":"Создана заявка номер "
-		},
-		{
-			"id":"RequestNew",
-			"trans":"Поступило новое обращение №:"
-		},
-		{
-			"id":"RequestPart2",
-			"trans":"Ваше обращение переводится на специалиста технической поддержки."
-		},
-		{
-			"id":"ByAddress",
-			"trans":"По адресу: "
-		},
-		{
-			"id":"ContinueEntering",
-			"trans":"Продолжите ввод"
-		},
-		{
-			"id":"yes",
-			"trans":"Да"
-		},
-		{
-			"id":"no",
-			"trans":"Нет"
+			"id":"answer2",
+			"ans0":"answer0",
+			"ans1":"answer0",
+			"ans2":"answer0"
 		}
+
 	],
 
 // комментарием является любая строка которая содержит // - эта строка удаляется 
@@ -142,7 +37,7 @@
 			"role":"admin",
 			"menu":[
 				{
-					"name":"Создать новую заявку",
+					"name":"answer0",
 					"next":"StartOld"
 				},
 				{
