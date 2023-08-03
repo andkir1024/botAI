@@ -1,18 +1,29 @@
-from collections import UserString
-from aiogram import Bot, Dispatcher, executor, types
+# from aiogram import Bot, Dispatcher, executor, types
+# from aiogram.contrib.fsm_storage.memory import MemoryStorage
+# from aiogram.dispatcher.filters.state import StatesGroup, State
+# from aiogram.dispatcher import FSMContext
+# from aiogram.contrib.middlewares.logging import LoggingMiddleware
+
+from aiogram import types
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.contrib.middlewares.logging import LoggingMiddleware
+
 from okDeskUtils import okDesk
 from processorMenu import *
 from kbs import *
  
 bot = Bot(token=mainConst.API_TOKEN)
-storage=MemoryStorage()
-dp = Dispatcher(bot, storage)
-dp.middleware.setup(LoggingMiddleware())
+# storage=MemoryStorage()
+dp = Dispatcher(bot, storage=MemoryStorage())
+# dp.middleware.setup(LoggingMiddleware())
+
 menu = processorMenu("config_ru.jsonc")
- 
+
+class UserState(StatesGroup):
+    name = State()
+    address = State()
+     
 @dp.message_handler(commands=['start'])
 async def cmd_start(msg: types.Message) -> None:
    kb, title = kbs.get_kb(menu, msg)
@@ -22,27 +33,34 @@ async def cmd_start(msg: types.Message) -> None:
 
 @dp.message_handler(commands=['test'])
 async def cmd_cancel(msg: types.Message) -> None:
-    await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
+     await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
 
+# test stasrt
+@dp.message_handler(commands=['reg'])
+async def user_register(message: types.Message):
+    await message.answer("Введите своё имя")
+    await UserState.name.set()
+    
+@dp.message_handler(state=UserState.name)
+async def get_username(message: types.Message, state: FSMContext):
+    await state.update_data(username=message.text)
+    await message.answer("Отлично! Теперь введите ваш адрес.")
+    await UserState.next() # либо же UserState.address.set()
+    
+@dp.message_handler(state=UserState.address)
+async def get_address(message: types.Message, state: FSMContext):
+    await state.update_data(address=message.text)
+    data = await state.get_data()
+    await message.answer(f"Имя: {data['username']}\n"
+                         f"Адрес: {data['address']}")
+
+    await state.finish()
+# test end
+        
 @dp.message_handler(state='*', commands=['setstate'])
 async def process_setstate_command(message: types.Message):
     argument = message.get_args()
     state = dp.current_state(user=message.from_user.id)
-    pass
-   #  if not argument:
-   #      await state.reset_state()
-   #      return await message.reply(MESSAGES['state_reset'])
-
-   #  if (not argument.isdigit()) or (not int(argument) < len(TestStates.all())):
-   #      return await message.reply(MESSAGES['invalid_key'].format(key=argument))
-
-   #  await state.set_state(TestStates.all()[int(argument)])
-   #  await message.reply(MESSAGES['state_change'], reply=False)
-         
-# @dp.message_handler(commands=['start'])
-# async def send_welcome(message: types.Message):
-#    await menu.doMenu(message)
-   # await message.reply("Привет!\nЯ Эхо-бот\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
  
 @dp.message_handler()
 async def echo(message: types.Message):
