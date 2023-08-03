@@ -67,3 +67,32 @@ class processorMenu:
                             return text[str(assistance)]
                         return text['0']
         return None
+    
+    def getMenu(self, msgCmd):
+        try:
+            msgCmd = msgCmd.lower()
+            menus = self.parsed_object['menus']
+            for menu in menus:
+                if menu['id'].lower() == msgCmd:
+                    menuCmd = menu['menu']
+                    typeBot = menu['typeBot']
+                    title = self.getAssisitans(typeBot, "answerTest", 0)
+                    kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
+                    for menuItem in menuCmd:
+                        place = 'place' in menuItem
+                        kb = KeyboardButton(menuItem['name'])
+                        if place == False:
+                            kb_clients.add(kb)
+                        else:
+                            if menuItem['place'] == 0:
+                                kb_clients.add(kb)
+                            else:
+                                kb_clients.insert(kb)
+
+                    return kb_clients , "aaa"
+
+        except Exception as e:
+            return None, None
+            
+        return None, None
+    

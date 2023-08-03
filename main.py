@@ -13,7 +13,9 @@ menu = processorMenu("config_ru.jsonc")
  
 @dp.message_handler(commands=['start'])
 async def cmd_start(msg: types.Message) -> None:
-   await msg.answer('Text', reply_markup=kb.get_kb(menu, msg))
+   kb, title = kbs.get_kb(menu, msg)
+   await msg.answer(title, reply_markup=kb)
+   # await msg.answer('Text', reply_markup=kb)
 
 
 @dp.message_handler(commands=['test'])
