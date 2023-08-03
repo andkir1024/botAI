@@ -80,7 +80,7 @@ class processorMenu:
             msgCmd = msgCmd.lower()
             menus = self.parsed_object['menus']
             for menu in menus:
-                if menu['id'].lower() == msgCmd:
+                if menu['id11'].lower() == msgCmd:
                     menuCmd = menu['menu']
                     typeBot = menu['typeBot']
                     title = self.testMsg(typeBot, menu['title'], 0)
