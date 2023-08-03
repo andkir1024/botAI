@@ -1,5 +1,7 @@
+from collections import UserString
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from okDeskUtils import okDesk
 from processorMenu import *
@@ -14,8 +16,6 @@ menu = processorMenu("config_ru.jsonc")
 @dp.message_handler(commands=['start'])
 async def cmd_start(msg: types.Message) -> None:
    kb, title = kbs.get_kb(menu, msg)
-   
-   # await msg.answer("dfgdfgdfg")
    
    if kb is not None:
       await msg.answer(title, reply_markup=kb)
@@ -48,7 +48,8 @@ async def process_setstate_command(message: types.Message):
 async def echo(message: types.Message):
    # res = requests.post('https://httpbin.org/post', data={'st3': 'jim hopper'})
    # print(res.text)
-   okDesk.findEquipmentByInvetoryId("5956")
+   # okDesk.findEquipmentByInvetoryId("5956")
+   menu.writeMsg(message)
 
    await message.answer(message.text)
  

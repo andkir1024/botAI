@@ -2,7 +2,7 @@
 
 import json
 from jsoncomment import JsonComment
-
+import os
 # import jsoncomment
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -16,7 +16,7 @@ class processorMenu:
         with open(name, 'r', encoding='utf-8') as f: #открыли файл с данными
             self.parsed_object = parser.load(f)
             
-        # user = userDB(True)
+        self.user = userDB(True)
         # user.getUserInfo(1000)
         return
     async def doMenu(self, message):
@@ -104,4 +104,9 @@ class processorMenu:
             return None, None
             
         return None, None
-    
+    def writeMsg(self, msg):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        with open(dir_path + mainConst.DIR_DATA + "messages.txt", "a") as text_file:
+            text_file.write(str(msg) + '\n')
+
+        return None            
