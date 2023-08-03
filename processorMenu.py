@@ -67,6 +67,13 @@ class processorMenu:
                             return text[str(assistance)]
                         return text['0']
         return None
+    def testMsg(self, typeBot, msg, assistant):
+        if "answer" in msg:
+            titleTmp = self.getAssisitans(typeBot, msg, assistant)
+            if titleTmp is not None:
+                return titleTmp
+            return msg
+        return msg
     
     def getMenu(self, msgCmd):
         try:
@@ -76,20 +83,21 @@ class processorMenu:
                 if menu['id'].lower() == msgCmd:
                     menuCmd = menu['menu']
                     typeBot = menu['typeBot']
-                    title = self.getAssisitans(typeBot, "answerTest", 0)
+                    title = self.testMsg(typeBot, menu['title'], 0)
                     kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
                     for menuItem in menuCmd:
                         place = 'place' in menuItem
-                        kb = KeyboardButton(menuItem['name'])
+                        name = self.testMsg(typeBot, menuItem['name'], 0)
+                        kb = KeyboardButton(name)
                         if place == False:
                             kb_clients.add(kb)
                         else:
-                            if menuItem['place'] == 0:
+                            if menuItem['place'] == '0':
                                 kb_clients.add(kb)
                             else:
                                 kb_clients.insert(kb)
 
-                    return kb_clients , "aaa"
+                    return kb_clients , title
 
         except Exception as e:
             return None, None
