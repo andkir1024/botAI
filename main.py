@@ -11,6 +11,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from okDeskUtils import okDesk
 from processorMenu import *
+from commonData import *
 from kbs import *
  
 bot = Bot(token=mainConst.API_TOKEN)
@@ -23,9 +24,13 @@ menu = processorMenu("config_ru.jsonc")
 class UserState(StatesGroup):
     name = State()
     address = State()
-     
+
+# Начаало
 @dp.message_handler(commands=['start'])
 async def cmd_start(msg: types.Message) -> None:
+   userCurrent = userDB(True)
+   userInfo = userCurrent.getUserInfo(msg)
+
    kb, title = kbs.get_kb(menu, msg)
    
    if kb is not None:
@@ -36,6 +41,7 @@ async def cmd_cancel(msg: types.Message) -> None:
      await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
 
 # test stasrt
+'''
 @dp.message_handler(commands=['reg'])
 async def user_register(message: types.Message):
     await message.answer("Введите своё имя")
@@ -55,6 +61,7 @@ async def get_address(message: types.Message, state: FSMContext):
                          f"Адрес: {data['address']}")
 
     await state.finish()
+'''    
 # test end
         
 @dp.message_handler(state='*', commands=['setstate'])
