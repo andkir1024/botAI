@@ -179,8 +179,8 @@ class okDesk:
         URLrequest = 'https://insitech.okdesk.ru/api/v1/issues/?' + mainConst.OKDESK_TOKEN
         typeUser = "contact"
         request = {
-            "issue": {
-                "title": str(title),
+            'issue': {
+                'title': str(title),
                 "type": str(typeRequest),
                 "description": str(description),
                 "contact_id": str(idUser),
@@ -197,7 +197,9 @@ class okDesk:
         }
         
         json_string = json.dumps(request)
-        res = requests.post(URLrequest, data=json_string)
+        res = requests.post(URLrequest, json=request)
+        # res = requests.post(URLrequest, data=json_string)
+        # zzz= json.dumps(res.json(), sort_keys=True, indent=4)
         # res = requests.post(URLrequest, data=request)
 
         return None 
