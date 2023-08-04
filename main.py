@@ -80,13 +80,13 @@ async def echo(msg: types.Message):
    userCurrent = userDB(True)
    userInfo, isNew = userCurrent.getUserInfo(msg)
    
-   kb, title, current_menu = kbs.get_next_kb(menu, msg, userInfo, isNew)
-   await msg.answer('111')
+   # kb, title, current_menu = kbs.get_next_kb(menu, msg, userInfo, isNew)
+   await kbs.get_next_kb(menu, msg, userInfo, isNew)
    
-   if kb is not None:
-      userInfo.current_menu = current_menu
-      userInfo.save()
-      await msg.answer(title, reply_markup=kb)
+   # if kb is not None:
+   #    userInfo.current_menu = current_menu
+   #    userInfo.save()
+   #    await msg.answer(title, reply_markup=kb)
    
    # menu.writeMsg(msg)
    # await msg.answer(msg.text)

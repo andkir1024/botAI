@@ -38,6 +38,11 @@ class processorMenu:
     def getAssisitans(self, typeBotTest, answerTest, assistance):
         typeBotTest = typeBotTest.lower()
         answerTest = answerTest.lower()
+        assistance = str(assistance) 
+        assistance = assistance.replace('userAssistant.assistant', '')
+        if assistance.isdigit == False:
+            return None
+        assistance = int(assistance)
         assistants = self.parsed_object['assistant']
         for ass in assistants:
             if typeBotTest == ass['typeBot'].lower():

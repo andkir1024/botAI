@@ -32,8 +32,14 @@ class kbs:
             else:
                 userInfo.assistant = userAssistant.assistant2
                 
-            await msg.answer('2222')
+            # await msg.answer('2222')
             msgCmd = 'start'
             menuReply, title = menu.getMenu(msgCmd, msg)
-            return menuReply, title, msgCmd
-        return None, None, None
+
+            if menuReply is not None:
+                titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
+                await msg.answer(titleTmp)
+                userInfo.current_menu = msgCmd
+                userInfo.save()
+                await msg.answer(title, reply_markup=menuReply)
+            return
