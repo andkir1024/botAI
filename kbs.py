@@ -1,4 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from okDeskUtils import okDesk
 from processorMenu import *
 
 class kbs:
@@ -70,6 +71,10 @@ class kbs:
                 if title is not None:
                     await msg.answer('ОШИБКА: '+title)
             return
+        # отрабатываем ввод данных
+        else:
+            await kbs.getUserData(menu, current_menu, msg)
+            pass
 
     async def get_kb_by_idmenu(menu, msg: types.Message, msgCmd) -> ReplyKeyboardMarkup:
         userCurrent = userDB(True)
@@ -81,4 +86,14 @@ class kbs:
             userInfo.current_menu = msgCmd
             userInfo.save()
             await msg.answer(title, reply_markup=menuReply)
+        return
+
+    async def getUserData(menu, current_menu, msg: types.Message):
+        # ввод номера плоттера
+        if current_menu == "menuRequestDeviceId".lower():
+            # res = okDesk.findEquipmentByInvetoryId(msg)
+            res = okDesk.createEquipmentByInvetoryId(msg.text)
+            msgReplay = res['name'] + '\n' + res['address']
+            await msg.answer(msgReplay)
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
         return

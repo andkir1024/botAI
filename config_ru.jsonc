@@ -445,6 +445,30 @@
 					"next":"start"
 				}
 			]
-		}
+		},
+		// меню запроса  и подтверждения места расположения
+		{
+			"id":"menuPlaceId",
+			"title":"Вы находитесь здесь?",
+			"menu":[
+				{
+					"name":"Да",
+					"place":"0",
+					"id":"yesButton",
+					"next":"yesId"
+				},
+				{
+					"name":"Нет",
+					"place":"2",
+					"id":"noButton",
+					"next":"noId"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"id":"returnButton",
+					"next":"start"
+				}
+			]
+		},
 	]
 }
