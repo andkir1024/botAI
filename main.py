@@ -31,12 +31,25 @@ async def cmd_start(msg: types.Message) -> None:
    userCurrent = userDB(True)
    userInfo, isNew = userCurrent.getUserInfo(msg)
 
-   kb, title, current_menu = kbs.get_kb(menu, msg, userInfo, isNew)
+   if userInfo.phone is None:
+      kb, title, current_menu = kbs.get_kb_phone(menu, msg)
+   else:
+      kb, title, current_menu = kbs.get_kb(menu, msg, userInfo, isNew)
    
    if kb is not None:
       userInfo.current_menu = current_menu
       userInfo.save()
       await msg.answer(title, reply_markup=kb)
+
+# @dp.message_handler(content_types=types.ContentType.CONTACT, state=Form.contacts)
+@dp.message_handler(content_types=types.ContentType.CONTACT)
+async def contacts(msg: types.Message, state: FSMContext):
+   userCurrent = userDB(True)
+   userInfo, isNew = userCurrent.getUserInfo(msg)
+   userInfo.phone = msg.contact.phone_number
+   userInfo.save()
+   await kbs.get_kb_by_idmenu(menu, msg, 'Registry')
+   # await msg.answer(f"Ваш номер: {msg.contact.phone_number}", reply_markup=types.ReplyKeyboardRemove())
 
 @dp.message_handler(commands=['test'])
 async def cmd_cancel(msg: types.Message) -> None:

@@ -390,6 +390,18 @@
 // "kb" тип клавиатуры (inline, reply)
 
 	"menus":[
+		// читать номер телефона 
+		{
+			"id":"menuPhone",
+			"title":"Для начала работы нам нужно зарегистрироваться",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Зарегистрироваться",
+					"next":"getPhoneNumber"
+				}
+			]
+		},
 		// зарегистрироваться
 		{
 			"id":"Registry",
@@ -447,7 +459,7 @@
 		// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"menuEditPointId",
-			"title":"Выберете компанию: ",
+			"title":"ВВедите код торговой точки: ",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
@@ -465,7 +477,7 @@
 				}
 			]
 		},
-		// меню запроса  и подтверждения места расположения
+		// меню запроса  и подтверждения места расположения (для номера плоттера)
 		{
 			"id":"menuPlaceId",
 			"title":"Вы находитесь здесь?",
@@ -479,6 +491,27 @@
 					"name":"Нет",
 					"place":"2",
 					"next":"menuRequestDeviceId"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню запроса  и подтверждения места расположения (для Точки обслуживания)
+		{
+			"id":"menuShopPlaceId",
+			"title":"Вы находитесь здесь?",
+			"menu":[
+				{
+					"name":"Да",
+					"place":"0",
+					"next":"menuPartnerWithoutIntegration"
+				},
+				{
+					"name":"Нет",
+					"place":"2",
+					"next":"menuEditPointId"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -539,24 +572,35 @@
 			"menu":[
 				{
 					"name":"Обратиться в поддержку",
-					"next":"start"
+					"next":"menuCreateRequestSupport"
 				},
 				{
 					"name":"Добавить лекало",
 					"place":"0",
-					"next":"start"
+					"next":"menuCreateRequestSupport"
 				},
 				{
 					"name":"Запросить расходники",
 					"place":"2",
-					"next":"start"
+					"next":"menuCreateRequestSupport"
 				},
 				{
 					"name":"Подтвердить доставку",
-					"next":"start"
+					"next":"menuCreateRequestSupport"
 				},
 				{
 					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню Обратиться в поддержку
+		{
+			"id":"menuCreateRequestSupport",
+			"title":"answer5",
+			"menu":[
+				{
+					"name":"Завершить обращение",
 					"next":"start"
 				}
 			]

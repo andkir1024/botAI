@@ -5,6 +5,12 @@ from processorMenu import *
 from aiogram.types import InputFile
 
 class kbs:
+    def get_kb_phone(menu, msg: types.Message) -> ReplyKeyboardMarkup:
+        kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
+        b2 = KeyboardButton('Зарегистрироваться', request_contact=True)
+        kb_clients.add(b2)
+        return kb_clients, 'Для начала работы нам нужно зарегистрироваться', 'menuPhone'
+
     def get_kb(menu, msg: types.Message, userInfo, isNew) -> ReplyKeyboardMarkup:
         msgCmd = msg.text
         first = msgCmd[0]
@@ -49,25 +55,27 @@ class kbs:
                 userInfo.assistant = userAssistant.assistant2
                 
             # await msg.answer('2222')
-            msgCmd = 'start'
-            menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
+            msgNext = 'start'
+            menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
             if menuReply is not None:
                 titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
                 await msg.answer(titleTmp)
-                userInfo.current_menu = msgCmd
+                userInfo.current_menu = msgNext
                 userInfo.save()
                 await msg.answer(title, reply_markup=menuReply)
             return
         # переход к следующему меню
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
         if next_menu is not None:
-            msgCmd = next_menu['next']
-            menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
+            msgNext = next_menu['next']
+            await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
+            
+            menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
             await kbs.showAppParameters(selMenu, msg, bot)
 
             if menuReply is not None:
-                userInfo.current_menu = msgCmd
+                userInfo.current_menu = msgNext
                 userInfo.save()
                 await msg.answer(title, reply_markup=menuReply)
             else:
@@ -115,7 +123,7 @@ class kbs:
         # ввод номера плоттера
         if current_menu == "menuRequestDeviceId".lower():
             # res = okDesk.findEquipmentByInvetoryId(msg)
-            res = okDesk.createEquipmentByInvetoryId(msg.text)
+            res = okDesk.findPlaceEquipmentByInvetoryId(msg.text)
             if res is None:
                 await msg.answer("Оборудование не найдено. Повторите!")
                 return
@@ -125,4 +133,32 @@ class kbs:
             msgReplay = res['name'] + '\n' + res['address']
             await msg.answer(msgReplay)
             await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+
+        # ввод торговой точки
+        if current_menu == "menuEditPointId".lower():
+            # res = okDesk.findEquipmentByInvetoryId(msg)
+            res = okDesk.findPlaceEquipmentByShopId(msg.text)
+            if res is None:
+                await msg.answer("Точка не найдена. Повторите!")
+                return
+            userInfo.okDeskInfo = msg.text
+            userInfo.save()
+            
+            msgReplay = res['name'] + '\n' + res['address']
+            await msg.answer(msgReplay)
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuShopPlaceId')
+
+        # ---------------------------------------------------------------------------------
+        # создание завки
+        # Обратиться в поддержку
+        if current_menu == "menuCreateRequestSupport".lower():
+            # userInfo.okDeskInfo = msg.text+'\n'
+            # userInfo.save()
+            pass
+        return
+    
+    # создание заявки
+    async def createRequest(menu, current_menu, msg: types.Message, userInfo, msgNext):
+        if msgNext.lower()=='menuCreateRequest'.lower():
+            return
         return
