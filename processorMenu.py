@@ -1,5 +1,5 @@
-# import json
 
+import traceback
 import json
 from jsoncomment import JsonComment
 import os
@@ -70,7 +70,9 @@ class processorMenu:
             for menu in menus:
                 if menu['id'].lower() == msgCmd:
                     menuCmd = menu['menu']
-                    typeBot = menu['typeBot']
+                    typeBot = 'base'
+                    if 'typeBot' in menu:
+                        typeBot = menu['typeBot']
                     title = self.testMsg(typeBot, menu['title'], 0)
                     kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
                     for menuItem in menuCmd:
@@ -88,8 +90,8 @@ class processorMenu:
                     return kb_clients , title
 
         except Exception as e:
-            msgMain.answer(str(e))
-            return None, None
+            err = "Error {0}".format(traceback.format_exc())
+            return None, err
             
         return None, None
     def writeMsg(self, msg):

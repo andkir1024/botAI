@@ -42,6 +42,11 @@ async def cmd_start(msg: types.Message) -> None:
 async def cmd_cancel(msg: types.Message) -> None:
      await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
 
+# регистрация ассистента
+@dp.message_handler(commands=['reg'])
+async def user_register(msg: types.Message):
+   await kbs.get_kb_by_idmenu(menu, msg, 'Registry')
+
 # test stasrt
 '''
 @dp.message_handler(commands=['reg'])
@@ -66,10 +71,10 @@ async def get_address(message: types.Message, state: FSMContext):
 '''    
 # test end
         
-@dp.message_handler(state='*', commands=['setstate'])
-async def process_setstate_command(message: types.Message):
-    argument = message.get_args()
-    state = dp.current_state(user=message.from_user.id)
+# @dp.message_handler(state='*', commands=['setstate'])
+# async def process_setstate_command(message: types.Message):
+#     argument = message.get_args()
+#     state = dp.current_state(user=message.from_user.id)
  
 @dp.message_handler()
 async def echo(msg: types.Message):
@@ -77,16 +82,11 @@ async def echo(msg: types.Message):
    # print(res.text)
    # okDesk.findEquipmentByInvetoryId("5956")
 
-   userCurrent = userDB(True)
-   userInfo, isNew = userCurrent.getUserInfo(msg)
-   
-   # kb, title, current_menu = kbs.get_next_kb(menu, msg, userInfo, isNew)
-   await kbs.get_next_kb(menu, msg, userInfo, isNew)
-   
-   # if kb is not None:
-   #    userInfo.current_menu = current_menu
-   #    userInfo.save()
-   #    await msg.answer(title, reply_markup=kb)
+   # userCurrent = userDB(True)
+   # userInfo, isNew = userCurrent.getUserInfo(msg)
+   # await kbs.get_next_kb(menu, msg, userInfo, isNew)
+
+   await kbs.get_next_kb(menu, msg)
    
    # menu.writeMsg(msg)
    # await msg.answer(msg.text)

@@ -19,9 +19,22 @@ class kbs:
         kb_clients.add(b1).add(b2).add(b3)
         msgReply = menu.getAssisitans("base", "answer1", 1)
         return kb_clients, 'Test andy'
-    
-    async def get_next_kb(menu, msg: types.Message, userInfo, isNew) -> ReplyKeyboardMarkup:
+
+    def findNextMenu(menu, findMsg, current_menu):
+        allMenu = menu.parsed_object['menus']
+        for mm in allMenu:
+            id = mm['id']
+            if id.lower() == current_menu.lower():
+                for itemMenu in mm['menu']:
+                    if itemMenu['name'].lower() == findMsg.lower():
+                        return itemMenu
+        return  None
+    async def get_next_kb(menu, msg: types.Message) -> ReplyKeyboardMarkup:
+        userCurrent = userDB(True)
+        userInfo, isNew = userCurrent.getUserInfo(msg)
+        
         current_menu = userInfo.current_menu.lower()
+        # next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
         # выбор ассистента
         if current_menu == 'Registry'.lower():
             lenName = len(msg.text)
@@ -43,3 +56,29 @@ class kbs:
                 userInfo.save()
                 await msg.answer(title, reply_markup=menuReply)
             return
+        # переход к следующему меню
+        next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
+        if next_menu is not None:
+            msgCmd = next_menu['next']
+            menuReply, title = menu.getMenu(msgCmd, msg)
+
+            if menuReply is not None:
+                userInfo.current_menu = msgCmd
+                userInfo.save()
+                await msg.answer(title, reply_markup=menuReply)
+            else:
+                if title is not None:
+                    await msg.answer('ОШИБКА: '+title)
+            return
+
+    async def get_kb_by_idmenu(menu, msg: types.Message, msgCmd) -> ReplyKeyboardMarkup:
+        userCurrent = userDB(True)
+        userInfo, isNew = userCurrent.getUserInfo(msg)
+        
+        menuReply, title = menu.getMenu(msgCmd, msg)
+
+        if menuReply is not None:
+            userInfo.current_menu = msgCmd
+            userInfo.save()
+            await msg.answer(title, reply_markup=menuReply)
+        return

@@ -11,19 +11,9 @@ pip freeze > Requirements.txt
 git config --global user.email "andkir@mail.ru"
 git config --global user.name "andkir1024"
 
-pip install PyInstaller
+комманды чат бота
 
-создание выполняемого файла
-pyinstaller --onefile main.py
-
-параметры запуска с командной строкой
-1. источник файлов png для обработки
---dirSrc=../popular/
-2. включение оконного режима иначи консоль отрабатывает всю заданную директорию dirSrc
---wnd
-3. коэффициэнт перемасштабирования для  создания svg (9.066)
---svg=9.066
-4. директория для результата
---dirDst=../popular/
-
-пример запуска
+start - Нажмите для запуска чат бота
+help - Нажмите для получения помощи
+reg - Нажмите для выбора ассистента
+test - тестирование не нажимайте

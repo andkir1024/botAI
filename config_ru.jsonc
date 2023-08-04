@@ -418,7 +418,7 @@
 			"menu":[
 				{
 					"name":"Номер плоттера",
-					"next":"start"
+					"next":"menuRequestDeviceId"
 				},
 				{
 					"name":"Фотография QR кода плоттера",
@@ -434,86 +434,15 @@
 				}
 			]
 		},
+		// меню запроса номера оборудования
 		{
-			"id":"Start0",
-			"type":"andy_problem",
-			"title":"answer2",
-			"role":"admin",
-			"typeBot":"base",
-			"kb":"reply",
+			"id":"menuRequestDeviceId",
+			"title":"Введите 4-значный номер плоттера (указан на задней крышке экрана)",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"Start"
-				}
-			]
-		},
-		{
-			"id":"Start1",
-			"type":"andy_problem",
-			"title":"Начало",
-			"role":"admin",
-			"typeBot":"base",
-			"kb":"inline",
-			"menu":[
-				{
-					"name":"answer1",
-					"next":"StartOld"
-				},
-				{
-					"name":"Запрос на гарантийный рез",
-					"type":"andy_RequestForGaranteeMenu",
-					"next":"proc1"
-				},
-				{
-					"name":"Послать QR код в админку",
-					"place":"0",
-					"next":"SendQRMenu"
-				},
-				{
-					"name":"Сотрудникам",
-					"admin":"prog",
-					"role":"user",
-					"place":"2",
-					"next":"UserMenuCommon"
-				},
-				{
-					"name":"Редактировать существующую заявку",
-					"next":"proc2"
-				}
-			]
-		},
-		{
-			"id":"Start2",
-			"type":"andy_problem",
-			"title":"Начало для клиентов",
-			"role":"client",
-			"typeBot":"base",
-			"menu":[
-				{
-					"name":"Создать новую заявку",
-					"next":"StartOld"
-				},
-				{
-					"name":"Запрос на гарантийный рез",
-					"type":"andy_RequestForGaranteeMenu",
-					"next":"proc1"
-				},
-				{
-					"name":"Послать QR код в админку",
-					"place":"0",
-					"next":"SendQRMenu"
-				},
-				{
-					"name":"Сотрудникам",
-					"admin":"prog",
-					"role":"user",
-					"place":"2",
-					"next":"UserMenuCommon"
-				},
-				{
-					"name":"Редактировать существующую заявку",
-					"next":"proc2"
+					"id":"returnButton",
+					"next":"start"
 				}
 			]
 		}
