@@ -53,7 +53,12 @@ async def contacts(msg: types.Message, state: FSMContext):
 
 @dp.message_handler(commands=['test'])
 async def cmd_cancel(msg: types.Message) -> None:
-     await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
+   userCurrent = userDB(True)
+   userInfo, isNew = userCurrent.getUserInfo(msg)
+   # okDesk.findUserByPhone("+79218866929")
+   # okDesk.findUserByPhone("9218866929")
+   okDesk.createRequest("5956", userInfo, 'Application_for_rez_Guarantee_auto')
+   # await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
 
 # регистрация ассистента
 @dp.message_handler(commands=['reg'])

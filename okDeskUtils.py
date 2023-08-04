@@ -1,4 +1,5 @@
 
+import json
 import requests
 from commonData import mainConst
 
@@ -49,69 +50,66 @@ class okDesk:
         return None
 
     # поиск пользователя
-    def findUserByPhone(phone, company_id):
+    def findUserByPhone(phone):
         #  проверка на наличие человека в базе
         sURLrequestUser = 'https://insitech.okdesk.ru/api/v1/contacts/?' + mainConst.OKDESK_TOKEN + '&phone=' + str(phone)
         res = requests.get(sURLrequestUser).json()
         if len(res) == 0:
             return None
 
-        # $idUser = $decodeRequest['id'];
-        # $company_id = $decodeRequest['company_id'];
-        # //если он есть
-        # $isUser = isset($idUser);
-        # if ($isUser == false)
-        #     return null;
-        # return $idUser;
+        if 'id' in res:
+            return res['id']
+        return None
 
 
     # создание пользователя
-    def postOkDeskCreateUser(data, phone, company_id, bot_data):
-        return None
-        # $company_id = null;
-        # $idUser = self::findUserByPhone($phone, $company_id);
-        # if ($idUser == null) {
-        #     $sURLcreateUser = 'https://insitech.okdesk.ru/api/v1/contacts/?' . okDeskToken;
-        #     //если нет то создаем
-        #     $json = array(
-        #         'contact' => array(
-        #             'first_name' => $data['chat']['first_name'],
-        #             'last_name' => $data['chat']['last_name'],
-        #             'phone' => $phone
-        #         )
-        #     );
+    def postOkDeskCreateUser(userInfo):
+        phone = userInfo.phone
+        idUser = okDesk.findUserByPhone(phone)
+        if idUser is None:
+            # если нет то создаем
+            sURLcreateUser = 'https://insitech.okdesk.ru/api/v1/contacts/?' + mainConst.OKDESK_TOKEN
+            # $json = array(
+            #     'contact' => array(
+            #         'first_name' => $data['chat']['first_name'],
+            #         'last_name' => $data['chat']['last_name'],
+            #         'phone' => $phone
+            #     )
+            # );
 
-        #     //$dataOut = json_encode($json, JSON_UNESCAPED_UNICODE );
-        #     $options = array(
-        #         'http' => array(
-        #             'method' => 'POST',
-        #             'header' => "Content-Type: application/json; charset=utf-8\r\n",
-        #             'content' => json_encode($json)
-        #         )
-        #     );
-        #     $context = stream_context_create($options);
-        #     $resultRequest = file_get_contents($sURLcreateUser, false, $context);
+            # //$dataOut = json_encode($json, JSON_UNESCAPED_UNICODE );
+            # $options = array(
+            #     'http' => array(
+            #         'method' => 'POST',
+            #         'header' => "Content-Type: application/json; charset=utf-8\r\n",
+            #         'content' => json_encode($json)
+            #     )
+            # );
+            # $context = stream_context_create($options);
+            # $resultRequest = file_get_contents($sURLcreateUser, false, $context);
 
-        #     $decodeRequest = json_decode($resultRequest, true);
-        #     $idUser = $decodeRequest['id'];
-        # }
-        # return $idUser;
+            # $decodeRequest = json_decode($resultRequest, true);
+            # $idUser = $decodeRequest['id'];
+        return idUser
 
     # создание заявки
-    def createRequest(inventory_number, messageRequest, typeRequst, bot_data, description, menuParam, usedNumbers):
-        return None
+    # def createRequest(inventory_number, messageRequest, typeRequst, bot_data, description, menuParam, usedNumbers):
+    def createRequest(inventory_number, userInfo, typeRequest):
+        # return None
         # получаем Объект обслуживания:
-        # URL = 'https://insitech.okdesk.ru/api/v1/equipments/?' + mainConst.OKDESK_TOKEN + '&inventory_number=' . str(inventory_number)
-        # res = requests.get(URL).json()
-        # if len(res) == 0:
-        #     return None
+        URL = 'https://insitech.okdesk.ru/api/v1/equipments/?' + mainConst.OKDESK_TOKEN + '&inventory_number=' + str(inventory_number)
+        resEqupment = requests.get(URL).json()
+        if len(resEqupment) == 0:
+            return None
         
-        # # поиск человека
-        # $company_id = null;
-        # $idUser = botUtils::postOkDeskCreateUser($data, $bot_data['phone'], $company_id, $bot_data);
-        # $idUser = (string)$idUser;
-        # //5 оформление заявки
-        # $idRequest = botUtils::postOkDeskRequest($typeRequst, $messageRequest, $idUser, $dataRes, $description, $usedNumbers, $company_id, $data);
+        # поиск человека
+        idUser = okDesk.postOkDeskCreateUser(userInfo)
+        if idUser is None:
+            return None
+
+        # оформление заявки
+        idRequest =okDesk.postOkDeskRequest(idUser, resEqupment, 'title', typeRequest, 'description')
+        # idRequest =okDesk.postOkDeskRequest($typeRequst, $messageRequest, $idUser, $dataRes, $description, $usedNumbers, $company_id, $data)
         # $idRequest = json_decode($idRequest, true);
 
         # $idRequestAddress = botUtils::getLoginLink() . '&redirect=/issues/' . $idRequest;
@@ -131,3 +129,143 @@ class okDesk:
         # botProcRequest::sendMessageAllAdmin($msgAdmin, $adminList);
 		# //
         # return $idRequest;
+
+    def testCluster(cluster):
+        if cluster is None:
+            return None
+        pieces = cluster.split()
+        if len(pieces) != 2:
+            return None
+        if pieces[1] == '2':
+            return 'normal'
+        if pieces[1] == '3':
+            return 'high'
+        if pieces[1] == '4':
+            return 'highest'
+        return 'low'
+
+    def addCompanyToContact(userId, company_id):
+        # редактирование контакта
+        sURLeditUser = 'https://insitech.okdesk.ru/api/v1/contacts/' + str(userId) + '?' + mainConst.OKDESK_TOKEN
+        # send_data = [
+        #     'company_id' => company_id,
+        #     # 'email' => 'aa1@mail.ru',
+
+        # ]
+        # options = array(
+        #     'http' => array(
+        #         'method' => 'PATCH',
+        #         'header' => "Content-Type: application/json; charset=utf-8\r\n",
+        #         'content' => json_encode(send_data)
+        #     )
+        # );
+        # context = stream_context_create(options)
+        # resultRequest = file_get_contents(sURLeditUser, false, context)
+    
+    def postOkDeskRequest(idUser, resEqupment, title, typeRequest, description):
+        maintenance_entity_id = resEqupment['maintenance_entity_id']
+        equipment_id = resEqupment['id']
+        URLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/' + str(maintenance_entity_id) + '?' + mainConst.OKDESK_TOKEN
+        resultsMaintenance = requests.get(URLmaintenance).json()
+        if len(resultsMaintenance) == 0:
+            return None
+        cluster = resultsMaintenance['parameters'][3]['value']
+        clusterId = okDesk.testCluster(cluster)
+        if maintenance_entity_id is None:
+            if 'company_id' in resultsMaintenance:
+                okDesk.addCompanyToContact(idUser, resultsMaintenance['company_id'])
+                maintenance_entity_id = resEqupment['maintenance_entity_id']
+
+        URLrequest = 'https://insitech.okdesk.ru/api/v1/issues/?' + mainConst.OKDESK_TOKEN
+        typeUser = "contact"
+        request = {
+            "issue": {
+                "title": str(title),
+                "type": str(typeRequest),
+                "description": str(description),
+                "contact_id": str(idUser),
+                "maintenance_entity_id": str(maintenance_entity_id),
+                "priority": str(clusterId),
+                "equipment_ids": [
+                    str(equipment_id),
+                ],
+                "author": {
+                    "id": str(idUser),
+                    "type": str(typeUser),
+                },
+            },
+        }
+        
+        json_string = json.dumps(request)
+        res = requests.post(URLrequest, data=json_string)
+        # res = requests.post(URLrequest, data=request)
+
+        return None 
+        # $maintenance_entity_id = $dataRes['maintenance_entity_id'];
+        # $equipment_id = null;
+        # $equipment_id = $dataRes['id'];
+        # if ($usedNumbers == false) {
+        #     $maintenance_entity_id = null;
+        #     $equipment_id = null;
+        # }
+        # if ($company_id == null)
+        #     $maintenance_entity_id = null;
+        # $sURLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/' . $dataRes['maintenance_entity_id'] . '?' . okDeskToken;
+        # $resultsMaintenance = self::getOkDesk($sURLmaintenance);
+        # $dataResMaintenance = json_decode($resultsMaintenance, true);
+        # $cluster = $dataResMaintenance['parameters'][3]['value'];
+        # $clusterId = self::testCluster($cluster);
+
+#         if ($maintenance_entity_id == null) {
+#             if ($dataResMaintenance['company_id'] != null) {
+#                 self::addCompanyToContact($userId, $dataResMaintenance['company_id']);
+#                 $maintenance_entity_id = $dataRes['maintenance_entity_id'];
+#             }
+#         }
+#         $sURLrequest = 'https://insitech.okdesk.ru/api/v1/issues/?' . okDeskToken;
+#         $adminList = botMenu::readAdmin('admin.json');
+#         $adminParam = botMenu::paramAdmin($data, $adminList);
+#         $user_id = $adminParam['user_id'];
+#         $type = 'contact';
+#         $id = $userId;
+#         if ($user_id != null) {
+#             $type = 'employee';
+#             $id = $user_id;
+#         }
+#         $json = array(
+#             'issue' => array(
+#                 'title' => $title,
+#                 'type' => $typeRequest,
+#                 'description' => $description,
+#                 'contact_id' => $userId,
+#                 'maintenance_entity_id' => $maintenance_entity_id,
+#                 'priority' => $clusterId,
+#                 'equipment_ids' => array(
+#                     $equipment_id,
+#                 ),
+#                 'author' => array(
+#                     'id' => (string)$id,
+# //				'type' => 'contact',
+#                     'type' => $type,
+#                 )
+#             )
+#         );
+
+#         $options = array(
+#             'http' => array(
+#                 'method' => 'POST',
+#                 'header' => "Content-Type: application/json; charset=utf-8\r\n",
+#                 'content' => json_encode($json)
+#             )
+#         );
+#         $context = stream_context_create($options);
+#         $resultRequest = file_get_contents($sURLrequest, false, $context);
+
+#         $decodeRequest = json_decode($resultRequest, true);
+#         $idRequest = $decodeRequest['id'];
+#         if ($maintenance_entity_id == null) {
+#             # получение информации о обекто обслуживания
+#             self::postOkDeskAddComment($userId, 'Это новый контакт.' . "\n" . $dataResMaintenance['name'] . "\n" . ' Необходима привязка', $idRequest);
+#             self::addCompanyToContact($userId, $dataResMaintenance['company_id']);
+#         }
+#         return $idRequest;
