@@ -11,6 +11,7 @@ class user:
     mode : int
     right : userRight
     assistant : userAssistant
+    current_menu : str
     data : str
     def __init__(self):
         self.id = 1335723885
@@ -20,6 +21,7 @@ class user:
         self.mode = -1
         self.right = userRight.admin
         self.assistant = userAssistant.assistant0
+        self.current_menu = ""
         self.data = ""
 
     def __init__(self, message : types.Message):
@@ -31,20 +33,19 @@ class user:
         self.mode = -1
         self.right = userRight.user
         self.assistant = userAssistant.assistant0
+        self.current_menu = ""
         self.data = ""
 
     def save(self):
+        # return
         s = json.dumps(self.__dict__)
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        fileUser = dir_path + mainConst.DIR_USER + str(self.id) + '.json'
+        fileUser = user.getFileName(self.id)
         with open(fileUser, "w") as text_file:
-            text_file.write(str(s) + '\n')
+            text_file.write(str(s))
         return
 
     def load(self):
-        s = json.dumps(self.__dict__)
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        fileUser = dir_path + mainConst.DIR_USER + str(self.id) + '.json'
+        fileUser = user.getFileName(self.id)
         exists = os.path.exists(fileUser)
         if exists:
             f = open(fileUser)
@@ -52,6 +53,12 @@ class user:
             self.__dict__ = data
             return
         return
+
+    def getFileName(id):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        fileUser = dir_path + mainConst.DIR_USER + str(id) + '.json'
+        return fileUser
+        
         
 class userDB:
     def __init__(self, isModel):
@@ -60,22 +67,16 @@ class userDB:
     def getUserInfo(self, message : types.Message):
         if mainConst.DB_TEST:
             return self.getTestUserInfo(message)
-        return None
+        return None, None
     def getTestUserInfo(self, message : types.Message):
         id = message.from_id
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        fileUser = dir_path + mainConst.DIR_USER + str(id) + '.json'
+        fileUser = user.getFileName(id)
         exists = os.path.exists(fileUser)
         if exists:
             usr =  user(message)
             usr.load()
-            pass
-        else:
-            # новый пользователь (сохранить, создать)
-            usr =  user(message)
-            usr.save()
-            return usr
-            pass
-        # if id == 1335723885:
-            # return user()
-        return None    
+            return usr, False
+        # новый пользователь (сохранить, создать)
+        usr =  user(message)
+        usr.save()
+        return usr, True

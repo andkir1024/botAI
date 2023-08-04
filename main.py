@@ -29,11 +29,13 @@ class UserState(StatesGroup):
 @dp.message_handler(commands=['start'])
 async def cmd_start(msg: types.Message) -> None:
    userCurrent = userDB(True)
-   userInfo = userCurrent.getUserInfo(msg)
+   userInfo, isNew = userCurrent.getUserInfo(msg)
 
-   kb, title = kbs.get_kb(menu, msg)
+   kb, title, current_menu = kbs.get_kb(menu, msg, userInfo, isNew)
    
    if kb is not None:
+      userInfo.current_menu = current_menu
+      userInfo.save()
       await msg.answer(title, reply_markup=kb)
 
 @dp.message_handler(commands=['test'])
@@ -70,13 +72,24 @@ async def process_setstate_command(message: types.Message):
     state = dp.current_state(user=message.from_user.id)
  
 @dp.message_handler()
-async def echo(message: types.Message):
+async def echo(msg: types.Message):
    # res = requests.post('https://httpbin.org/post', data={'st3': 'jim hopper'})
    # print(res.text)
    # okDesk.findEquipmentByInvetoryId("5956")
-   menu.writeMsg(message)
 
-   await message.answer(message.text)
+   userCurrent = userDB(True)
+   userInfo, isNew = userCurrent.getUserInfo(msg)
+   
+   kb, title, current_menu = kbs.get_next_kb(menu, msg, userInfo, isNew)
+   await msg.answer('111')
+   
+   if kb is not None:
+      userInfo.current_menu = current_menu
+      userInfo.save()
+      await msg.answer(title, reply_markup=kb)
+   
+   # menu.writeMsg(msg)
+   # await msg.answer(msg.text)
  
 if __name__ == '__main__':
    executor.start_polling(dp, skip_updates=True)

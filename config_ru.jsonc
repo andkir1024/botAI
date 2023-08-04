@@ -390,6 +390,26 @@
 // "kb" тип клавиатуры (inline, reply)
 
 	"menus":[
+		// зарегистрироваться
+		{
+			"id":"Registry",
+			"title":"Выберете ассистента",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Армор Джекович",
+					"next":"start"
+				},
+				{
+					"name":"Джек",
+					"next":"start"
+				},
+				{
+					"name":"Армора",
+					"next":"start"
+				}
+			]
+		},
 		// начало работы
 		{
 			"id":"Start",
