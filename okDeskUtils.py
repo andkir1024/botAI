@@ -22,28 +22,45 @@ class okDesk:
         URL = 'https://insitech.okdesk.ru/api/v1/equipments/?' + mainConst.OKDESK_TOKEN + '&inventory_number=' + str(inventory_number)
 
         res = requests.get(URL).json()
+        if len(res) == 0:
+            return None
         
         maintenance_entity_id = res['maintenance_entity_id']
 
         URLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/' + str(maintenance_entity_id) + '?' + mainConst.OKDESK_TOKEN
         resMaintenance = requests.get(URLmaintenance).json()
+        if len(resMaintenance) == 0:
+            return None
         return resMaintenance
 
-        # //Получение списка обьектов обслуживания
-        # $maintenance_entity_id = $dataRes['maintenance_entity_id'];
-        # //$sURLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/list?'.okDeskToken;
-        # $sURLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/' . $maintenance_entity_id . '?' . okDeskToken;
-        # $resultsMaintenance = botUtils::getOkDesk($sURLmaintenance);
-        # $dataResMaintenance = json_decode($resultsMaintenance, true);
-        # $address = $dataResMaintenance['address'];
-        # $point = $dataResMaintenance['name'];
-        # $addressResult = $dataResMaintenance;
+    # запрос на расположение устройства по InvetoryId (торговая точка)
+    def createShopByInvetoryId(inventory_number):
+        # Поиск торговой точки
+        URL = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/?' + mainConst.OKDESK_TOKEN +  '&search_string=' + str(inventory_number)
+        res = requests.get(URL).json()
+        if len(res) == 0:
+            return None
+        return None
 
-        # //3 нахождение ддреса
+        # $result = botUtils::getOkDesk($sURL);
+        # $dataRes = json_decode($result, true);
+        # $all = count($dataRes);
+        # $addressResult = array();
+        # for ($i = 0; $i < $all; $i++) {
+        #     //Получение списка обьектов обслуживания
+        #     $maintenance_entity_id = $dataRes[$i]['id'];
+        #     if ($maintenance_entity_id != null) {
+        #         $sURLmaintenance = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/' . $maintenance_entity_id . '?' . okDeskToken;
+        #         $resultsMaintenance = botUtils::getOkDesk($sURLmaintenance);
+        #         $dataResMaintenance = json_decode($resultsMaintenance, true);
+        #         $address = $dataResMaintenance['address'];
+        #         array_push($addressResult, $dataResMaintenance);
 
-        # $info = $dataResMaintenance['name'] . "\n" . 'По адресу: ' . $address;
+        #     }
+        # }
+        # if (count($addressResult) > 0) {
+        #     //sendMessage($info, $data);
+        #     return $addressResult;
+        # }
+        # return null;
 
-        # if ($dataRes['maintenance_entity_id'] == null)
-        #     return null;
-        # botUtils::sendMessage($info, $data);
-        # return $addressResult;

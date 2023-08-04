@@ -7,6 +7,7 @@ class mainConst():
     OKDESK_TOKEN = 'api_token=ae71c1f696464efe94383d6acf37fa031b1848fb'
     DIR_DATA = '/data/'
     DIR_USER = '/users/'
+    DIR_RESOURCE = '/resource/'
     
 class userRight(str,enum.Enum):
     undifined = 'undifined'

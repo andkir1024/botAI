@@ -86,7 +86,8 @@ async def echo(msg: types.Message):
    # userInfo, isNew = userCurrent.getUserInfo(msg)
    # await kbs.get_next_kb(menu, msg, userInfo, isNew)
 
-   await kbs.get_next_kb(menu, msg)
+   # await bot.sendp.send_p.answer(msg.text)
+   await kbs.get_next_kb(menu, msg, bot)
    
    # menu.writeMsg(msg)
    # await msg.answer(msg.text)

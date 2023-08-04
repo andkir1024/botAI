@@ -422,27 +422,52 @@
 				},
 				{
 					"name":"Фотография QR кода плоттера",
-					"next":"start"
+					"next":"SelectPlotterByQRMenu"
 				},
 				{
 					"name":"Код торговой точки",
-					"next":"start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"menuEditPointId"
 				}
+				// {
+				// 	"name":"Вернуться в начальное меню",
+				// 	"next":"start"
+				// }
 			]
 		},
 		// меню запроса номера оборудования
 		{
 			"id":"menuRequestDeviceId",
 			"title":"Введите 4-значный номер плоттера (указан на задней крышке экрана)",
+			"video":"device_number.mp4",
+			// "photo":"photo_0.jpg",
+			"url":"https://yandex.com/",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
 					"id":"returnButton",
 					"next":"start"
+				}
+			]
+		},
+		// меню выбора компании торговой точки (предложено выбрать)
+		{
+			"id":"menuEditPointId",
+			"title":"Выберете компанию: ",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"id":"returnButton",
+					"next":"start"
+				}
+			]
+		},
+		{
+			"id":"SelectPlotterByQRMenu",
+			"title":"Сканируйте QR код плоттера",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"Start"
 				}
 			]
 		},
@@ -461,7 +486,7 @@
 					"name":"Нет",
 					"place":"2",
 					"id":"noButton",
-					"next":"noId"
+					"next":"menuRequestDeviceId"
 				},
 				{
 					"name":"Вернуться в начальное меню",

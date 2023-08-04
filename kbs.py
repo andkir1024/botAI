@@ -1,6 +1,8 @@
+import html
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from okDeskUtils import okDesk
 from processorMenu import *
+from aiogram.types import InputFile
 
 class kbs:
     def get_kb(menu, msg: types.Message, userInfo, isNew) -> ReplyKeyboardMarkup:
@@ -10,7 +12,7 @@ class kbs:
             msgCmd = msgCmd[1:]
         if isNew:
             msgCmd = 'Registry'
-        menuReply, title = menu.getMenu(msgCmd, msg)
+        menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
         return menuReply, title, msgCmd
             
         kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -30,7 +32,7 @@ class kbs:
                     if itemMenu['name'].lower() == findMsg.lower():
                         return itemMenu
         return  None
-    async def get_next_kb(menu, msg: types.Message) -> ReplyKeyboardMarkup:
+    async def get_next_kb(menu, msg: types.Message, bot) -> ReplyKeyboardMarkup:
         userCurrent = userDB(True)
         userInfo, isNew = userCurrent.getUserInfo(msg)
         
@@ -48,7 +50,7 @@ class kbs:
                 
             # await msg.answer('2222')
             msgCmd = 'start'
-            menuReply, title = menu.getMenu(msgCmd, msg)
+            menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
 
             if menuReply is not None:
                 titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
@@ -61,7 +63,8 @@ class kbs:
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
         if next_menu is not None:
             msgCmd = next_menu['next']
-            menuReply, title = menu.getMenu(msgCmd, msg)
+            menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
+            await kbs.showAppParameters(selMenu, msg, bot)
 
             if menuReply is not None:
                 userInfo.current_menu = msgCmd
@@ -75,12 +78,31 @@ class kbs:
         else:
             await kbs.getUserData(menu, current_menu, msg)
             pass
+    async def showAppParameters(selMenu, msg: types.Message, bot):
+        if selMenu is not None:
+            video = None
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            if 'video' in selMenu:
+                video = selMenu['video']
+                fileVideo = dir_path + mainConst.DIR_RESOURCE + video
+                await bot.send_video(msg.chat.id, open(fileVideo, 'rb'))
+            if 'photo' in selMenu:
+                photo = selMenu['photo']
+                filePhoto = dir_path + mainConst.DIR_RESOURCE + photo
+                photo = InputFile(filePhoto)
+                await bot.send_photo(msg.chat.id, photo = photo)
+                # await bot.send_photo(msg.chat.id, open(filePhoto, 'rb'))
+            if 'url' in selMenu:
+                url = selMenu['url']
+                await msg.reply(f"URL: {url}\n")                
+                # await msg.reply(f"URL: {html.quote(url)}\n")                
+        return
 
     async def get_kb_by_idmenu(menu, msg: types.Message, msgCmd) -> ReplyKeyboardMarkup:
         userCurrent = userDB(True)
         userInfo, isNew = userCurrent.getUserInfo(msg)
         
-        menuReply, title = menu.getMenu(msgCmd, msg)
+        menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
 
         if menuReply is not None:
             userInfo.current_menu = msgCmd
@@ -93,6 +115,9 @@ class kbs:
         if current_menu == "menuRequestDeviceId".lower():
             # res = okDesk.findEquipmentByInvetoryId(msg)
             res = okDesk.createEquipmentByInvetoryId(msg.text)
+            if res is None:
+                await msg.answer("Оборудование не найдено. Повторите!")
+                return
             msgReplay = res['name'] + '\n' + res['address']
             await msg.answer(msgReplay)
             await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')

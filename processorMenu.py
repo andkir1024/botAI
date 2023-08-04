@@ -87,13 +87,13 @@ class processorMenu:
                             else:
                                 kb_clients.insert(kb)
 
-                    return kb_clients , title
+                    return kb_clients , title, menu
 
         except Exception as e:
             err = "Error {0}".format(traceback.format_exc())
-            return None, err
+            return None, err, None
             
-        return None, None
+        return None, None, None
     def writeMsg(self, msg):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         with open(dir_path + mainConst.DIR_DATA + "messages.txt", "a") as text_file:
