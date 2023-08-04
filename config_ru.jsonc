@@ -413,7 +413,7 @@
 		// начало работы
 		{
 			"id":"Start",
-			"title":"Начало. Выбор типа заявки",
+			"title":"answer2",
 			"typeBot":"base",
 			"menu":[
 				{
@@ -428,10 +428,6 @@
 					"name":"Код торговой точки",
 					"next":"menuEditPointId"
 				}
-				// {
-				// 	"name":"Вернуться в начальное меню",
-				// 	"next":"start"
-				// }
 			]
 		},
 		// меню запроса номера оборудования
@@ -440,11 +436,10 @@
 			"title":"Введите 4-значный номер плоттера (указан на задней крышке экрана)",
 			"video":"device_number.mp4",
 			// "photo":"photo_0.jpg",
-			"url":"https://yandex.com/",
+			// "url":"https://yandex.com/",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"id":"returnButton",
 					"next":"start"
 				}
 			]
@@ -456,7 +451,6 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"id":"returnButton",
 					"next":"start"
 				}
 			]
@@ -479,21 +473,93 @@
 				{
 					"name":"Да",
 					"place":"0",
-					"id":"yesButton",
-					"next":"yesId"
+					"next":"menuPartnerWithoutIntegration"
 				},
 				{
 					"name":"Нет",
 					"place":"2",
-					"id":"noButton",
 					"next":"menuRequestDeviceId"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"id":"returnButton",
 					"next":"start"
 				}
 			]
 		},
+		// меню чат бота для партнер без интеграции
+		{
+			"id":"menuPartnerWithoutIntegration",
+			"title":"меню чат бота для партнера без интеграции",
+			"menu":[
+				{
+					"name":"Создать новую заявку",
+					"next":"menuCreateRequest"
+				},
+				{
+					"name":"Редактировать существующую заявку",
+					"next":"Start"
+				},
+				{
+					"name":"Мой магазин",
+					"next":"menuShop"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню магазина
+		{
+			"id":"menuShop",
+			"title":"Мой магазин",
+			"menu":[
+				{
+					"name":"Запросить обучение",
+					"next":"start"
+				},
+				{
+					"name":"Сотрудник AJ",
+					"next":"start"
+				},
+				{
+					"name":"База знаний",
+					"next":"start"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// создать новую заявку
+		{
+			"id":"menuCreateRequest",
+			"title":"answer4",
+			"menu":[
+				{
+					"name":"Обратиться в поддержку",
+					"next":"start"
+				},
+				{
+					"name":"Добавить лекало",
+					"place":"0",
+					"next":"start"
+				},
+				{
+					"name":"Запросить расходники",
+					"place":"2",
+					"next":"start"
+				},
+				{
+					"name":"Подтвердить доставку",
+					"next":"start"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		}
 	]
 }

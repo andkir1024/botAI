@@ -12,7 +12,7 @@ class kbs:
             msgCmd = msgCmd[1:]
         if isNew:
             msgCmd = 'Registry'
-        menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
+        menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
         return menuReply, title, msgCmd
             
         kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -32,12 +32,12 @@ class kbs:
                     if itemMenu['name'].lower() == findMsg.lower():
                         return itemMenu
         return  None
+
     async def get_next_kb(menu, msg: types.Message, bot) -> ReplyKeyboardMarkup:
         userCurrent = userDB(True)
         userInfo, isNew = userCurrent.getUserInfo(msg)
         
         current_menu = userInfo.current_menu.lower()
-        # next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
         # выбор ассистента
         if current_menu == 'Registry'.lower():
             lenName = len(msg.text)
@@ -50,7 +50,7 @@ class kbs:
                 
             # await msg.answer('2222')
             msgCmd = 'start'
-            menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
+            menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
 
             if menuReply is not None:
                 titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
@@ -63,7 +63,7 @@ class kbs:
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
         if next_menu is not None:
             msgCmd = next_menu['next']
-            menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
+            menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
             await kbs.showAppParameters(selMenu, msg, bot)
 
             if menuReply is not None:
@@ -76,8 +76,8 @@ class kbs:
             return
         # отрабатываем ввод данных
         else:
-            await kbs.getUserData(menu, current_menu, msg)
-            pass
+            await kbs.getUserData(menu, current_menu, msg, userInfo)
+        
     async def showAppParameters(selMenu, msg: types.Message, bot):
         if selMenu is not None:
             video = None
@@ -102,7 +102,7 @@ class kbs:
         userCurrent = userDB(True)
         userInfo, isNew = userCurrent.getUserInfo(msg)
         
-        menuReply, title, selMenu = menu.getMenu(msgCmd, msg)
+        menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
 
         if menuReply is not None:
             userInfo.current_menu = msgCmd
@@ -110,7 +110,8 @@ class kbs:
             await msg.answer(title, reply_markup=menuReply)
         return
 
-    async def getUserData(menu, current_menu, msg: types.Message):
+    # отработка введенных данных
+    async def getUserData(menu, current_menu, msg: types.Message, userInfo):
         # ввод номера плоттера
         if current_menu == "menuRequestDeviceId".lower():
             # res = okDesk.findEquipmentByInvetoryId(msg)
@@ -118,6 +119,9 @@ class kbs:
             if res is None:
                 await msg.answer("Оборудование не найдено. Повторите!")
                 return
+            userInfo.okDeskInfo = msg.text
+            userInfo.save()
+            
             msgReplay = res['name'] + '\n' + res['address']
             await msg.answer(msgReplay)
             await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')

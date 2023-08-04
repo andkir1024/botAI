@@ -12,6 +12,7 @@ class user:
     right : userRight
     assistant : userAssistant
     current_menu : str
+    okDeskInfo : str
     data : str
     def __init__(self):
         self.id = 1335723885
@@ -22,6 +23,7 @@ class user:
         self.right = userRight.admin
         self.assistant = userAssistant.assistant0
         self.current_menu = ""
+        self.okDeskInfo = ""
         self.data = ""
 
     def __init__(self, message : types.Message):
@@ -34,6 +36,7 @@ class user:
         self.right = userRight.user
         self.assistant = userAssistant.assistant0
         self.current_menu = ""
+        self.okDeskInfo = ""
         self.data = ""
 
     def save(self):

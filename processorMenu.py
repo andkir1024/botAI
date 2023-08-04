@@ -40,6 +40,7 @@ class processorMenu:
         answerTest = answerTest.lower()
         assistance = str(assistance) 
         assistance = assistance.replace('userAssistant.assistant', '')
+        assistance = assistance.replace('assistant', '')
         if assistance.isdigit == False:
             return None
         assistance = int(assistance)
@@ -63,21 +64,22 @@ class processorMenu:
             return msg
         return msg
     
-    def getMenu(self, msgCmd, msgMain: types.Message):
+    def getMenu(self, msgCmd, msgMain: types.Message, userInfo):
         try:
             msgCmd = msgCmd.lower()
             menus = self.parsed_object['menus']
+            assistant = userInfo.assistant
             for menu in menus:
                 if menu['id'].lower() == msgCmd:
                     menuCmd = menu['menu']
                     typeBot = 'base'
                     if 'typeBot' in menu:
                         typeBot = menu['typeBot']
-                    title = self.testMsg(typeBot, menu['title'], 0)
+                    title = self.testMsg(typeBot, menu['title'], assistant)
                     kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
                     for menuItem in menuCmd:
                         place = 'place' in menuItem
-                        name = self.testMsg(typeBot, menuItem['name'], 0)
+                        name = self.testMsg(typeBot, menuItem['name'], assistant)
                         kb = KeyboardButton(name)
                         if place == False:
                             kb_clients.add(kb)
