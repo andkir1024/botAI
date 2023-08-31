@@ -14,6 +14,8 @@ class user:
     current_menu : str
     okDeskInfo : str
     data : str
+    # информация выводимая ботом для конкретного пользователя
+    infoMode : int
     def __init__(self):
         self.id = 1335723885
         self.phone = '89218866929'
@@ -25,6 +27,7 @@ class user:
         self.current_menu = ""
         self.okDeskInfo = ""
         self.data = ""
+        self.infoMode = -1
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -38,6 +41,7 @@ class user:
         self.current_menu = ""
         self.okDeskInfo = ""
         self.data = ""
+        self.infoMode = -1
 
     def save(self):
         # return

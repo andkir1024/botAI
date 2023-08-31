@@ -65,6 +65,11 @@ async def cmd_cancel(msg: types.Message) -> None:
 async def user_register(msg: types.Message):
    await kbs.get_kb_by_idmenu(menu, msg, 'Registry')
 
+# включение режима информирования
+@dp.message_handler(commands=['info'])
+async def user_infoMode(msg: types.Message):
+   await kbs.setInfoMode(msg)
+
 # test stasrt
 '''
 @dp.message_handler(commands=['reg'])
