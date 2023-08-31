@@ -394,11 +394,11 @@ def decodeImage(nameImage, modeS=-1):
 
     timeEnd = time.time()
 
-nameImg = sys.argv[1]
-extractText = sys.argv[2]
-decodeImage(nameImg, extractText)
 
-# decodeImage('ok.jpg', -2)
-# decodeImage('ok1.jpg', 0)
-
+if __name__ == "__main__":
+    nameImg = sys.argv[1]
+    extractText = sys.argv[2]
+    decodeImage(nameImg, extractText)
+    # decodeImage('ok.jpg', -2)
+    # decodeImage('ok1.jpg', 0)
 

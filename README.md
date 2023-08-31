@@ -11,6 +11,9 @@ pip freeze > Requirements.txt
 git config --global user.email "andkir@mail.ru"
 git config --global user.name "andkir1024"
 
+sudo apt-get install libzbar0
+sudo apt-get install tesseract-ocr-rus -y
+
 комманды чат бота
 
 start - Нажмите для запуска чат бота
