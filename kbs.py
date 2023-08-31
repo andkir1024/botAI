@@ -128,15 +128,9 @@ class kbs:
                 if mode.isdigit():
                     userInfo.infoMode = int(mode)
                     userInfo.save()
+            else:
+               await msg.answer("Небходим номер запроса")
         return
-        
-        # menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
-
-        # if menuReply is not None:
-        #     userInfo.current_menu = msgCmd
-        #     userInfo.save()
-        #     await msg.answer(title, reply_markup=menuReply)
-        # return
 
     # отработка введенных данных
     async def getUserData(menu, current_menu, msg: types.Message, userInfo):

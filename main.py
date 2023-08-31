@@ -13,6 +13,7 @@ from okDeskUtils import okDesk
 from processorMenu import *
 from commonData import *
 from kbs import *
+from testBot import *
  
 bot = Bot(token=mainConst.API_TOKEN)
 # storage=MemoryStorage()
@@ -51,14 +52,10 @@ async def contacts(msg: types.Message, state: FSMContext):
    await kbs.get_kb_by_idmenu(menu, msg, 'Registry')
    # await msg.answer(f"Ваш номер: {msg.contact.phone_number}", reply_markup=types.ReplyKeyboardRemove())
 
+# тестирование 
 @dp.message_handler(commands=['test'])
 async def cmd_cancel(msg: types.Message) -> None:
-   userCurrent = userDB(True)
-   userInfo, isNew = userCurrent.getUserInfo(msg)
-   # okDesk.findUserByPhone("+79218866929")
-   # okDesk.findUserByPhone("9218866929")
-   okDesk.createRequest("5956", userInfo, 'Application_for_rez_Guarantee_auto')
-   # await msg.answer('Canceled', reply_markup=types.ReplyKeyboardRemove())
+   await testBotUtils.testManager(msg)
 
 # регистрация ассистента
 @dp.message_handler(commands=['reg'])
