@@ -70,13 +70,13 @@ async def user_infoMode(msg: types.Message):
 @dp.message_handler(content_types=types.ContentType.DOCUMENT)
 async def scan_message(message: types.Message):
     print("downloading document")
-    destination = r"C:\users\aleks\PycharmProjects\pythonProject\file.pdf"
+    destination = "tempData/"
     await message.document.download(destination)
     print("success")
     
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(message):
-   await message.photo[-1].download('test.jpg')
+   await message.photo[-1].download('tempData/test.jpg')
    # raw = await message.photo[0].download()
 
 # @dp.message_handler(content_types=ContentType.PHOTO)
