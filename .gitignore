@@ -3,5 +3,6 @@ build
 dist
 data
 users
+tempData
 __pycache__
 .~lock.
