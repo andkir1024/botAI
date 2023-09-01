@@ -27,7 +27,7 @@ class user:
         self.current_menu = ""
         self.okDeskInfo = ""
         self.data = ""
-        self.infoMode = -1
+        self.infoMode = infoShow.undifined
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -41,7 +41,7 @@ class user:
         self.current_menu = ""
         self.okDeskInfo = ""
         self.data = ""
-        self.infoMode = -1
+        self.infoMode = infoShow.undifined
 
     def save(self):
         # return

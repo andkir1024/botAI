@@ -14,6 +14,7 @@ from processorMenu import *
 from commonData import *
 from kbs import *
 from testBot import *
+from managerQR import *
  
 bot = Bot(token=mainConst.API_TOKEN)
 # storage=MemoryStorage()
@@ -67,6 +68,7 @@ async def user_register(msg: types.Message):
 async def user_infoMode(msg: types.Message):
    await kbs.setInfoMode(msg)
 
+# передача чеков на распознание
 @dp.message_handler(content_types=types.ContentType.DOCUMENT)
 async def scan_message(message: types.Message):
     print("downloading document")
@@ -76,7 +78,8 @@ async def scan_message(message: types.Message):
     
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(message):
-   await message.photo[-1].download('tempData/test.jpg')
+   await managerQR.testPhoto(message)
+   # await message.photo[-1].download('tempData/test.jpg')
    # raw = await message.photo[0].download()
 
 # @dp.message_handler(content_types=ContentType.PHOTO)

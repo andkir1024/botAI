@@ -209,6 +209,7 @@ def testText(rusKey, strokeRus, maxWord1):
 
 
 def decodeImage(nameImage, modeS=-1):
+    result = []
     mode = int(modeS)
     rusKey = ''
     rusKeyApp0 = ''
@@ -303,9 +304,11 @@ def decodeImage(nameImage, modeS=-1):
 
             if checkInfo == "":
                checkInfo = messageQR
-            print(checkInfo)
-            print(' text %', maxWordCheck)
-            return
+            result.append(checkInfo)
+            result.append(f"text {maxWordCheck}")
+            print(result[0])
+            print(result[1])
+            return result
 
         first = True
         # gray = prepareImagheForTextDecode(imgZ2, 1.8, 10, False,False,False)
@@ -336,9 +339,11 @@ def decodeImage(nameImage, modeS=-1):
 
         if checkInfo == "":
             checkInfo = messageQR
-        print(checkInfo)
-        print(' text %', maxWordCheck)
-        return
+        result.append(checkInfo)
+        result.append(f"text {maxWordCheck}")
+        print(result[0])
+        print(result[1])
+        return result
 
     if lenObject != 0:
         # qrcode = decoded_objects1[0].data.decode("utf-8")
@@ -357,7 +362,8 @@ def decodeImage(nameImage, modeS=-1):
         else:
             messageQR = qrcode
 
-    print(messageQR)
+    result.append(messageQR)
+    # print(messageQR)
     gray = cv2.cvtColor(imgZ2, cv2.COLOR_BGR2GRAY)
     if rusKey != "":
         textRus = pytesseract.image_to_string(gray, lang="rus")
@@ -382,17 +388,27 @@ def decodeImage(nameImage, modeS=-1):
                 maxWord0 = a0
 
     if mode == 0:
-        print(' text %', min(maxWord0, maxWord1))
+        result.append(f"text {min(maxWord0, maxWord1)}")
+        # print(' text %', min(maxWord0, maxWord1))
     if mode == 1:
-        print(' text %', maxWord1)
+        result.append(f"text {maxWord1}")
+        # print(' text %', maxWord1)
     if mode == 2:
-        print(' text %', maxWord1)
+        result.append(f"text {maxWord1}")
+        # print(' text %', maxWord1)
     if mode == 3:
-        print(' text %', min(maxWord0, maxWord1))
+        result.append(f"text {min(maxWord0, maxWord1)}")
+        # print(' text %', min(maxWord0, maxWord1))
     if mode == 4:
-        print(' text %', maxWord1)
+        result.append(f"text {maxWord1}")
+        # print(' text %', maxWord1)
 
     timeEnd = time.time()
+    # result.append(checkInfo)
+    # result.append(f"text {maxWordCheck}")
+    print(result[0])
+    print(result[1])
+    return result
 
 
 if __name__ == "__main__":
