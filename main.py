@@ -71,34 +71,19 @@ async def user_infoMode(msg: types.Message):
 # передача чеков на распознание
 @dp.message_handler(content_types=types.ContentType.DOCUMENT)
 async def scan_message(message: types.Message):
-    print("downloading document")
-    destination = "tempData/"
-    await message.document.download(destination)
-    print("success")
+   await managerQR.testPhotoAsDocument(message)
     
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(message):
    await managerQR.testPhoto(message)
-   # await message.photo[-1].download('tempData/test.jpg')
-   # raw = await message.photo[0].download()
-
-# @dp.message_handler(content_types=ContentType.PHOTO)
-# async def process_photo(message: types.Message):
-#     # Получаем список фотографий в сообщении
-#     photos = message.photo
 
 #     # Перебираем фотографии и обрабатываем их
 #     for photo in photos:
 #         # Скачиваем фотографию
 #         await photo.download()
 #         # Обрабатываем фотографию (например, сохраняем ее в базу данных)
-#         process_photo(photo.file)
-        
-# @dp.message_handler(content_types=['photo'])
-# async def message_text(message: types.Message):
-#    await message.photo[-1].download('img/am.jpg')
-        
-# test stasrt
+#         process_photo(photo.file)       
+
 '''
 @dp.message_handler(commands=['reg'])
 async def user_register(message: types.Message):
