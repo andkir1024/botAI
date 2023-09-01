@@ -15,7 +15,7 @@ class managerQR:
             # destination_file = bot.download_file(file_path, destination)
             timeStart = time.time()
             await message.photo[-1].download('tempData/test.jpg')
-            resultQR = decodeImage('tempData/test.jpg', 0)
+            resultQR = decodeImage('tempData/test.jpg', decodeQRMode.onlyQR)
             if userInfo.infoMode == infoShow.QR:
                 timeDelta = time.time() - timeStart
                 await message.answer(f"Информация по QR запросу {timeDelta:0.2f} сек")

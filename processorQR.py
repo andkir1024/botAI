@@ -6,6 +6,8 @@ from PIL import Image
 from fuzzywuzzy import fuzz
 from pyzbar import pyzbar
 
+from commonData import decodeQRMode
+
 def prepareImagheForTextDecode(img, alpha, beta, scale, clahe, contrast):
     if scale == True:
         scale_percent = 200  # percent of original size
@@ -215,21 +217,21 @@ def decodeImage(nameImage, modeS=-1):
     rusKeyApp0 = ''
     engKey = ''
     # mtc
-    if mode == 0:
+    if mode == decodeQRMode.MTC:
         rusKey = 'РусскаяТелефоннаяк'
         engKey = 'ArmorJack'
     # вымпелком
-    if mode == 1:
+    if mode == decodeQRMode.Vimpel:
         rusKey = 'Вымпелком услуга аппаратная пленка'
     # mvideo
-    if mode == 2:
+    if mode == decodeQRMode.MVideo:
         rusKey = '_ МВМ накл плёнки'
         rusKeyApp0 = '_ МВМ ИНСИТЕХ'
         # rusKeyApp0 = 'МВМ услуги изготовлению наклейке пленки'
-    if mode == 3:
+    if mode == decodeQRMode.MegaFon:
         rusKey = 'Мегафон'
         engKey = 'ArmorJack'
-    if mode == 4:
+    if mode == decodeQRMode.Paper:
         rusKey = 'Изготовление+наклейка'
 
     timeStart = time.time()
@@ -363,7 +365,7 @@ def decodeImage(nameImage, modeS=-1):
             messageQR = qrcode
 
     result.append(messageQR)
-    # print(messageQR)
+
     gray = cv2.cvtColor(imgZ2, cv2.COLOR_BGR2GRAY)
     if rusKey != "":
         textRus = pytesseract.image_to_string(gray, lang="rus")
@@ -389,25 +391,18 @@ def decodeImage(nameImage, modeS=-1):
 
     if mode == 0:
         result.append(f"text {min(maxWord0, maxWord1)}")
-        # print(' text %', min(maxWord0, maxWord1))
     if mode == 1:
         result.append(f"text {maxWord1}")
-        # print(' text %', maxWord1)
     if mode == 2:
         result.append(f"text {maxWord1}")
-        # print(' text %', maxWord1)
     if mode == 3:
         result.append(f"text {min(maxWord0, maxWord1)}")
-        # print(' text %', min(maxWord0, maxWord1))
     if mode == 4:
         result.append(f"text {maxWord1}")
-        # print(' text %', maxWord1)
 
     timeEnd = time.time()
-    # result.append(checkInfo)
-    # result.append(f"text {maxWordCheck}")
-    print(result[0])
-    print(result[1])
+    for res in result:
+        print(res)
     return result
 
 

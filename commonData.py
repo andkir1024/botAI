@@ -14,6 +14,14 @@ class infoShow(int,enum.Enum):
     undifined = -1
     QR = 1
 
+class decodeQRMode(int,enum.Enum):
+    onlyQR = -1
+    MTC = 0
+    Vimpel = 1
+    MVideo = 2
+    MegaFon = 3
+    Paper = 4
+
 class userRight(str,enum.Enum):
     undifined = 'undifined'
     admin = 'admin'
