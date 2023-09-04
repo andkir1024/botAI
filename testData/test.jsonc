@@ -6,6 +6,7 @@
 				{
 					"id":"test Mts",
 					"dir":"mts",
+					"param":"0",
 					"data":[
 						{
 							"name":"ok.jpg",
@@ -22,6 +23,7 @@
 				{
 					"id":"test Megafon",
 					"dir":"megafon",
+					"param":"3",
 					"data":[
 						{
 							"name":"ok.jpg",
@@ -38,6 +40,7 @@
 				{
 					"id":"test PlotterQR",
 					"dir":"plottersQR",
+					"param":"-1",
 					"data":[
 						{
 							"name":"qrPlotter.jpg",

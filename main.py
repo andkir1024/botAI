@@ -58,6 +58,11 @@ async def contacts(msg: types.Message, state: FSMContext):
 async def cmd_cancel(msg: types.Message) -> None:
    await testBotUtils.testManager(msg)
 
+# остановка процесса
+@dp.message_handler(commands=['stop'])
+async def cmd_cancel(msg: types.Message) -> None:
+   testBotUtils.stop = True
+
 # регистрация ассистента
 @dp.message_handler(commands=['reg'])
 async def user_register(msg: types.Message):
