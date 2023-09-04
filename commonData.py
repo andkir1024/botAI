@@ -8,6 +8,7 @@ class mainConst():
     DIR_DATA = '/data/'
     DIR_USER = '/users/'
     DIR_RESOURCE = '/resource/'
+    DIR_TEST = './testData/'
     
 
 class infoShow(int,enum.Enum):

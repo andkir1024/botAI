@@ -16,8 +16,10 @@ class managerQR:
                 photo_id = document.file_unique_id
                 photo_name = f'tempData/{photo_id}.jpg'     
                 await message.document.download(photo_name)
-                return await managerQR.decodePhoto(message, photo_name, userInfo)
-        return False
+                resultQR =  await managerQR.decodePhoto(message, photo_name, userInfo)
+                result = managerQR.isPlotterQRplotter(resultQR, userInfo.current_menu)
+                return result
+        return None
 
     async def testPhoto(message: types.Message):
         userCurrent = userDB(True)
@@ -29,9 +31,11 @@ class managerQR:
 
             await photo.download(photo_name)
             # raw = await photo.download()
-            return await managerQR.decodePhoto(message, photo_name, userInfo)
+            resultQR =  await managerQR.decodePhoto(message, photo_name, userInfo)
+            result = managerQR.isPlotterQRplotter(resultQR, userInfo.current_menu)
+            return result
 
-        return False
+        return None
 
     async def decodePhoto(message: types.Message, photo_name, userInfo):
         timeStart = time.time()
@@ -42,6 +46,8 @@ class managerQR:
             await message.answer(f"Информация по QR запросу {timeDelta:0.2f} сек")
             for result in resultQR:
                 await message.answer(result)
-            return True
 
-        return False
+        return resultQR
+
+    def isPlotterQRplotter(qrvalue, cmd):
+        return cmd

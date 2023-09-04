@@ -1,3 +1,5 @@
+import json
+from jsoncomment import JsonComment
 from aiogram import types
 from kbs import *
 
@@ -29,7 +31,27 @@ class testBotUtils:
 
     # тестирование QR кодов
     async def testQR(userInfo,msg: types.Message):
-        await msg.answer("Тестировиние QR")
+        try:
+            name = mainConst.DIR_TEST + "test.jsonc"
+            parser = JsonComment(json)
+            with open(name, 'r', encoding='utf-8') as f: #открыли файл с данными
+                parsed_object = parser.load(f)
+            allTest = parsed_object['allTests']
+            for all in allTest:
+                if all['typeTest'] == 'qrTests':
+                    for test in all['tests']:
+                        id = test['id']
+                        dir = test['dir']
+                        data = test['data']
+                        await msg.answer(f"Тестировиние {id}")
+                        allTested = 0
+                        for photo in data:
+                            name = photo['name']
+                            qr = photo['qr']
+                            allTested +=1
+                        await msg.answer(f"Всего {allTested}")
+        except:
+            await msg.answer("Ошибка в тестировании")
 
 
 

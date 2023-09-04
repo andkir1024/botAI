@@ -4,5 +4,6 @@ dist
 data
 users
 tempData
+photos
 __pycache__
 .~lock.
