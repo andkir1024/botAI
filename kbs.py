@@ -132,6 +132,24 @@ class kbs:
                await msg.answer("Небходим номер запроса")
         return
 
+    async def setParam(msg: types.Message):
+        userCurrent = userDB(True)
+        userInfo, isNew = userCurrent.getUserInfo(msg)
+        if isNew == False:
+            pieces = msg.text.split()
+            if len(pieces)==3:
+                all_variables = dir(userInfo)
+                for param in all_variables:
+                    if param == pieces[1]:
+                        value = pieces[2]
+                        # userInfo.save()
+                        await msg.answer(f"Параметр {pieces[1]} изменен на {value}")
+                        return
+                await msg.answer("Параметр не нрайден")
+            else:
+               await msg.answer("Небходим номер запроса")
+        return
+
     # отработка введенных данных
     async def getUserData(menu, current_menu, msg: types.Message, userInfo):
         # ввод номера плоттера

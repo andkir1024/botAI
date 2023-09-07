@@ -43,6 +43,10 @@ class user:
         self.data = ""
         self.infoMode = infoShow.undifined
 
+    def getAllVar(self):
+        all_variables = dir()
+        return all_variables
+        
     def save(self):
         # return
         s = json.dumps(self.__dict__)

@@ -73,11 +73,17 @@ async def user_register(msg: types.Message):
 async def user_infoMode(msg: types.Message):
    await kbs.setInfoMode(msg)
 
-# передача чеков на распознание
+# передача параметров пользователю
+@dp.message_handler(commands=['set'])
+async def user_setParam(msg: types.Message):
+   await kbs.setParam(msg)
+
+# передача чеков на распознание (DOCUMENT)
 @dp.message_handler(content_types=types.ContentType.DOCUMENT)
 async def scan_message(message: types.Message):
    await managerQR.testPhotoAsDocument(message)
     
+# передача чеков на распознание (photo)
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(message):
    await managerQR.testPhoto(message)
