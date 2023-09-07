@@ -139,11 +139,14 @@ class kbs:
             pieces = msg.text.split()
             if len(pieces)==3:
                 all_variables = dir(userInfo)
+                paramName = pieces[1]
                 for param in all_variables:
-                    if param == pieces[1]:
+                    if param == paramName:
                         value = pieces[2]
+                        await msg.answer(f"Параметр {paramName} изменен на {value}")
+                        exec(f"userInfo.{paramName} = {value}")
+                        paramName = value
                         # userInfo.save()
-                        await msg.answer(f"Параметр {pieces[1]} изменен на {value}")
                         return
                 await msg.answer("Параметр не нрайден")
             else:
