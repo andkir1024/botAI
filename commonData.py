@@ -29,6 +29,14 @@ class userRight(str,enum.Enum):
     worker = 'worker'
     user = 'user'
 
+class userType(str,enum.Enum):
+    undifined = 'undifined'
+    admin = 'admin'
+    employer = 'employer'
+    client = 'client'
+    clientAntiFrod = 'clientAntiFrod'
+    clientIntegration = 'clientIntegration'
+
 class userAssistant(str, enum.Enum):
     undifined = 'undifined'
     assistant0 = 'assistant0'

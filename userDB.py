@@ -14,6 +14,7 @@ class user:
     current_menu : str
     okDeskInfo : str
     data : str
+    userType : str
     # информация выводимая ботом для конкретного пользователя
     infoMode : int
     def __init__(self):
@@ -28,6 +29,7 @@ class user:
         self.okDeskInfo = ""
         self.data = ""
         self.infoMode = infoShow.undifined
+        self.userType = userType.undifined
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -42,10 +44,7 @@ class user:
         self.okDeskInfo = ""
         self.data = ""
         self.infoMode = infoShow.undifined
-
-    def getAllVar(self):
-        all_variables = dir()
-        return all_variables
+        self.userType = userType.undifined
         
     def save(self):
         # return
