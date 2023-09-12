@@ -48,6 +48,25 @@
 			"typeBot":"base",
 			"menu":[
 				{
+					"name":"Сообщить о проблеме",
+					"next":"menuProblem"
+				},
+				{
+					"name":"Создать заявку",
+					"next":"menuCreateRequest"
+				},
+				{
+					"name":"База знаний",
+					"next":"menuDBKnown"
+				}
+			]
+		},
+		{
+			"id":"menuCreateRequest",
+			"title":"answer2",
+			"typeBot":"base",
+			"menu":[
+				{
 					"name":"Номер плоттера",
 					"next":"menuRequestDeviceId"
 				},
@@ -58,6 +77,21 @@
 				{
 					"name":"Код торговой точки",
 					"next":"menuEditPointId"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню база данных
+		{
+			"id":"menuDBKnown",
+			"title":"answer10",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
 				}
 			]
 		},
@@ -123,82 +157,6 @@
 				}
 			]
 		},
-		// меню чат бота для клиентов
-		{
-			"id":"menuPlaceIdclientMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuPlaceIdclient"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
-					"next":"menuRequestDeviceId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
-		{
-			"id":"clientAntiFrodMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuClientAntiFrod"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
-					"next":"menuRequestDeviceId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
-		{
-			"id":"clientIntegrationMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuClientIntegration"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
-					"next":"menuRequestDeviceId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для плохих клиентов
-		{
-			"id":"menuPlaceIdBad",
-			"title":"Ваш тип неопределен",
-			"menu":[
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// еонец выбор меню запроса вхависимости от типа клинета
-		////////////////////////////////////////////////////////////////////////
 		// меню запроса  и подтверждения места расположения (для Точки обслуживания)
 		{
 			"id":"menuShopPlaceId",
@@ -232,82 +190,6 @@
 				{
 					"name":"Создать заявку",
 					"next":"menuCreateRequest"
-				},
-				{
-					"name":"База знаний",
-					"next":"start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для клиентов
-		{
-			"id":"menuPlaceIdclient",
-			"title":"меню чат бота для клиентов",
-			"menu":[
-				{
-					"name":"Создать новую заявку",
-					"next":"menuCreateRequest"
-				},
-				{
-					"name":"Редактировать существующую заявку",
-					"next":"Start"
-				},
-				{
-					"name":"Мой магазин",
-					"next":"menuShop"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для МВМ и Мегафон (антифрод)
-		{
-			"id":"menuClientAntiFrod",
-			"title":"меню чат бота для МВМ и Мегафон",
-			"menu":[
-				{
-					"name":"Запрос на гарантийный рез",
-					"next":"Start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для МТС и Билайн (интеграция)
-		{
-			"id":"menuClientIntegration",
-			"title":"меню чат бота для МТС и Билайн",
-			"menu":[
-				{
-					"name":"Рез по QR коду",
-					"next":"Start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню магазина
-		{
-			"id":"menuShop",
-			"title":"Мой магазин",
-			"menu":[
-				{
-					"name":"Запросить обучение",
-					"next":"start"
-				},
-				{
-					"name":"Сотрудник AJ",
-					"next":"start"
 				},
 				{
 					"name":"База знаний",
@@ -356,35 +238,6 @@
 				{
 					"name":"Завершено",
 					"next":"start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// создать новую заявку
-		{
-			"id":"menuCreateRequest",
-			"title":"answer4",
-			"menu":[
-				{
-					"name":"Обратиться в поддержку",
-					"next":"menuCreateRequestSupport"
-				},
-				{
-					"name":"Добавить лекало",
-					"place":"0",
-					"next":"menuCreateRequestSupport"
-				},
-				{
-					"name":"Запросить расходники",
-					"place":"2",
-					"next":"menuCreateRequestSupport"
-				},
-				{
-					"name":"Подтвердить доставку",
-					"next":"menuCreateRequestSupport"
 				},
 				{
 					"name":"Вернуться в начальное меню",
