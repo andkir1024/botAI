@@ -61,6 +61,58 @@
 				}
 			]
 		},
+		// меню чат бота для сотрудников
+		{
+			"id":"menuPlaceIdemployerMain",
+			"title":"Вы находитесь здесь?",
+			"menu":[
+				{
+					"name":"Да",
+					"place":"0",
+					"next":"menuPlaceIdemployer"
+				},
+				{
+					"name":"Нет",
+					"place":"2",
+					"next":"menuRequestDeviceId"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},	
+		// меню чат бота для сотрудников
+		{
+			"id":"menuPlaceIdemployer",
+			"title":"меню чат бота для сотрудников",
+			"menu":[
+				{
+					"name":"Добавить/Поправить лекало",
+					"next":"menuProblemDo"
+				},
+				{
+					"name":"Временный доступ к точке",
+					"next":"menuProblemDo"
+				},
+				{
+					"name":"Смена типа резв",
+					"next":"menuProblemDo"
+				},
+				{
+					"name":"Закрытие торговой точки",
+					"next":"menuProblemDoB"
+				},
+				{
+					"name":"Открытие торговой точки",
+					"next":"menuProblemDoA"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},			
 		{
 			"id":"menuCreateRequest",
 			"title":"answer2",
@@ -87,7 +139,7 @@
 		// меню база данных
 		{
 			"id":"menuDBKnown",
-			"title":"answer10",
+			"title":"answer14",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
@@ -132,31 +184,6 @@
 				}
 			]
 		},
-		////////////////////////////////////////////////////////////////////////
-		// выбор меню запроса вхависимости от типа клинета
-		// меню запроса  и подтверждения места расположения (для номера плоттера)
-
-		// меню чат бота для сотрудников
-		{
-			"id":"menuPlaceIdemployerMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuPlaceIdemployer"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
-					"next":"menuRequestDeviceId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
 		// меню запроса  и подтверждения места расположения (для Точки обслуживания)
 		{
 			"id":"menuShopPlaceId",
@@ -171,29 +198,6 @@
 					"name":"Нет",
 					"place":"2",
 					"next":"menuEditPointId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню чат бота для сотрудников
-		{
-			"id":"menuPlaceIdemployer",
-			"title":"меню чат бота для сотрудников",
-			"menu":[
-				{
-					"name":"Сообщить о проблеме",
-					"next":"menuProblem"
-				},
-				{
-					"name":"Создать заявку",
-					"next":"menuCreateRequest"
-				},
-				{
-					"name":"База знаний",
-					"next":"start"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -233,7 +237,35 @@
 		// меню о проблемк
 		{
 			"id":"menuProblemDo",
-			"title":"Опишите проблему",
+			"title":"answer30",
+			"menu":[
+				{
+					"name":"Завершено",
+					"next":"start"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		{
+			"id":"menuProblemDoA",
+			"title":"answer28",
+			"menu":[
+				{
+					"name":"Завершено",
+					"next":"start"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		{
+			"id":"menuProblemDoB",
+			"title":"answer29",
 			"menu":[
 				{
 					"name":"Завершено",
