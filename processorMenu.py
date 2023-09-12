@@ -69,10 +69,15 @@ class processorMenu:
             return msg
         return msg
     
-    def getMenu(self, msgCmd, msgMain: types.Message, userInfo):
+    def getMenuReal(self, msg: types.Message, userInfo):
+        if userInfo.userType == 'employer' :
+            return self.parsed_employer['menus']
+        return self.parsed_object['menus']
+    def getMenu(self, msgCmd, msg: types.Message, userInfo):
         try:
             msgCmd = msgCmd.lower()
-            menus = self.parsed_object['menus']
+            # menus = self.parsed_object['menus']
+            menus = self.getMenuReal(msg, userInfo)
             assistant = userInfo.assistant
             for menu in menus:
                 if menu['id'].lower() == msgCmd:

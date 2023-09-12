@@ -29,8 +29,9 @@ class kbs:
         msgReply = menu.getAssisitans("base", "answer1", 1)
         return kb_clients, 'Test andy'
 
-    def findNextMenu(menu, findMsg, current_menu):
-        allMenu = menu.parsed_object['menus']
+    def findNextMenu(menu, findMsg, current_menu, msg: types.Message, userInfo):
+        # allMenu = menu.parsed_object['menus']
+        allMenu = menu.getMenuReal(msg, userInfo)
         for mm in allMenu:
             id = mm['id']
             if id.lower() == current_menu.lower():
@@ -67,7 +68,7 @@ class kbs:
                 await msg.answer(title, reply_markup=menuReply)
             return
         # переход к следующему меню
-        next_menu = kbs.findNextMenu(menu, msg.text, current_menu)
+        next_menu = kbs.findNextMenu(menu, msg.text, current_menu, msg, userInfo)
         if next_menu is not None:
             msgNext = next_menu['next']
             await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
