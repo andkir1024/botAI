@@ -49,7 +49,7 @@ class processorMenu:
         if assistance.isdigit == False:
             return None
         assistance = int(assistance)
-        assistants = self.parsed_object['assistant']
+        assistants = self.parsed_answer['assistant']
         for ass in assistants:
             if typeBotTest == ass['typeBot'].lower():
                 answers = ass['answers']
