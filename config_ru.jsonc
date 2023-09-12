@@ -612,11 +612,11 @@
 				},
 				{
 					"name":"Создать заявку",
-					"next":""
+					"next":"menuCreateRequest"
 				},
 				{
 					"name":"База знаний",
-					"next":""
+					"next":"start"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -711,10 +711,12 @@
 				},
 				{
 					"name":"Проблема с логистикой",
+					"place":"0",
 					"next":"menuProblemDo"
 				},
 				{
 					"name":"Проблема со складом",
+					"place":"2",
 					"next":"menuProblemDo"
 				},
 				{
