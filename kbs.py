@@ -178,15 +178,15 @@ class kbs:
             userInfo, isNew = kbs.getMainUserInfo(msg)
             await msg.answer(msgReplay)
             if userInfo.userType == 'employer':
-                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdemployerMain')
             elif userInfo.userType == 'client':
-                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientMain')
             elif userInfo.userType == 'clientAntiFrod':
-                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientAntiFrodMain')
             elif userInfo.userType == 'clientIntegration':
-                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientIntegrationMain')
             else:
-                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdBad')
                 
 
         # ввод торговой точки
