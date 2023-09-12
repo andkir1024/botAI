@@ -29,3 +29,7 @@ test - тестирование не нажимайте
 /info 0 - режимы информирования о QR опрецияях (выводится полная информация)
 
 /set param value
+/set userType employer
+/set userType client
+/set userType clientAntiFrod
+/set userType clientIntegration

@@ -460,6 +460,7 @@
 		{
 			"id":"menuEditPointId",
 			"title":"ВВедите код торговой точки: ",
+			"photo":"photo_0.jpg",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
@@ -470,6 +471,7 @@
 		{
 			"id":"SelectPlotterByQRMenu",
 			"title":"Сканируйте QR код плоттера",
+			"photo":"photo_0.jpg",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",

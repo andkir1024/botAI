@@ -40,8 +40,9 @@ class kbs:
         return  None
 
     async def get_next_kb(menu, msg: types.Message, bot) -> ReplyKeyboardMarkup:
-        userCurrent = userDB(True)
-        userInfo, isNew = userCurrent.getUserInfo(msg)
+        # userCurrent = userDB(True)
+        # userInfo, isNew = userCurrent.getUserInfo(msg)
+        userInfo, isNew = kbs.getMainUserInfo(msg)
         
         current_menu = userInfo.current_menu.lower()
         # выбор ассистента
@@ -107,9 +108,10 @@ class kbs:
         return
 
     async def get_kb_by_idmenu(menu, msg: types.Message, msgCmd) -> ReplyKeyboardMarkup:
-        userCurrent = userDB(True)
-        userInfo, isNew = userCurrent.getUserInfo(msg)
+        # userCurrent = userDB(True)
+        # userInfo, isNew = userCurrent.getUserInfo(msg)
         
+        userInfo, isNew = kbs.getMainUserInfo(msg)
         menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
 
         if menuReply is not None:
@@ -119,8 +121,9 @@ class kbs:
         return
 
     async def setInfoMode(msg: types.Message):
-        userCurrent = userDB(True)
-        userInfo, isNew = userCurrent.getUserInfo(msg)
+        # userCurrent = userDB(True)
+        # userInfo, isNew = userCurrent.getUserInfo(msg)
+        userInfo, isNew = kbs.getMainUserInfo(msg)
         if isNew == False:
             pieces = msg.text.split()
             if len(pieces)==2:
@@ -133,8 +136,9 @@ class kbs:
         return
 
     async def setParam(msg: types.Message):
-        userCurrent = userDB(True)
-        userInfo, isNew = userCurrent.getUserInfo(msg)
+        # userCurrent = userDB(True)
+        # userInfo, isNew = userCurrent.getUserInfo(msg)
+        userInfo, isNew = kbs.getMainUserInfo(msg)
         if isNew == False:
             pieces = msg.text.split()
             if len(pieces)==3:
@@ -152,6 +156,11 @@ class kbs:
             else:
                await msg.answer("Небходим номер запроса")
         return
+    def getMainUserInfo(msg: types.Message):
+        userCurrent = userDB(True)
+        userInfo, isNew = userCurrent.getUserInfo(msg)
+        return userInfo, isNew
+    
 
     # отработка введенных данных
     async def getUserData(menu, current_menu, msg: types.Message, userInfo):
@@ -166,8 +175,19 @@ class kbs:
             userInfo.save()
             
             msgReplay = res['name'] + '\n' + res['address']
+            userInfo, isNew = kbs.getMainUserInfo(msg)
             await msg.answer(msgReplay)
-            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+            if userInfo.userType == 'employer':
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+            elif userInfo.userType == 'client':
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+            elif userInfo.userType == 'clientAntiFrod':
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+            elif userInfo.userType == 'clientIntegration':
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+            else:
+                await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceId')
+                
 
         # ввод торговой точки
         if current_menu == "menuEditPointId".lower():
