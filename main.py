@@ -21,7 +21,7 @@ bot = Bot(token=mainConst.API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 # dp.middleware.setup(LoggingMiddleware())
 
-menu = processorMenu("config_ru.jsonc")
+menu = processorMenu()
 
 class UserState(StatesGroup):
     name = State()

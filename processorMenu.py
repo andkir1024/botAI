@@ -10,11 +10,16 @@ from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButt
 from userDB import *
 
 class processorMenu:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
         parser = JsonComment(json)
-        with open(name, 'r', encoding='utf-8') as f: #открыли файл с данными
+        with open("." + mainConst.DIR_RESOURCE + "config_ru.jsonc", 'r', encoding='utf-8') as f: #открыли файл с данными
             self.parsed_object = parser.load(f)
+
+        with open("." + mainConst.DIR_RESOURCE + "config_employer_ru.jsonc", 'r', encoding='utf-8') as f: #открыли файл с данными
+            self.parsed_employer = parser.load(f)
+
+        with open("." + mainConst.DIR_RESOURCE + "answer_ru.jsonc", 'r', encoding='utf-8') as f: #открыли файл с данными
+            self.parsed_answer = parser.load(f)
             
         # self.user = userDB(True)
         # user.getUserInfo(1000)
