@@ -60,6 +60,25 @@
 				}
 			]
 		},
+		{
+			"id":"StartPure",
+			"title":"answer2",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Номер плоттера",
+					"next":"menuRequestDeviceId"
+				},
+				{
+					"name":"Фотография QR кода плоттера",
+					"next":"SelectPlotterByQRMenu"
+				},
+				{
+					"name":"Код торговой точки",
+					"next":"menuEditPointId"
+				}
+			]
+		},
 		// меню запроса номера оборудования
 		{
 			"id":"menuRequestDeviceId",
@@ -400,6 +419,27 @@
 			"id":"menuConfirmDelivery",
 			"title":"answer24",
 			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню подтвердить доставку (соответсвует акту?)
+		{
+			"id":"menuCorrespondsToAct",
+			"title":"answer25",
+			"menu":[
+				{
+					"name":"Да",
+					"place":"0"
+					// "next":"menuCorrespondsToActYes"
+				},
+				{
+					"name":"Нет",
+					"place":"2"
+					// "next":"menuCorrespondsToActNo"
+				},
 				{
 					"name":"Вернуться в начальное меню",
 					"next":"start"

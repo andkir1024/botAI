@@ -39,8 +39,6 @@ async def cmd_start(msg: types.Message) -> None:
       kb, title, current_menu = kbs.get_kb(menu, msg, userInfo, isNew)
    
    if kb is not None:
-      # if userInfo.userType == 'employer':
-      #    current_menu = 'startEmployer'
       userInfo.current_menu = current_menu
       userInfo.save()
       await msg.answer(title, reply_markup=kb)
@@ -82,13 +80,14 @@ async def user_setParam(msg: types.Message):
 
 # передача чеков на распознание (DOCUMENT)
 @dp.message_handler(content_types=types.ContentType.DOCUMENT)
-async def scan_message(message: types.Message):
-   await managerQR.testPhotoAsDocument(message)
+async def scan_message(msg: types.Message):
+   await managerQR.testPhotoAsDocument(msg)
     
 # передача чеков на распознание (photo)
 @dp.message_handler(content_types=['photo'])
-async def handle_docs_photo(message):
-   await managerQR.testPhoto(message)
+async def handle_docs_photo(msg):
+   await kbs.sendMediaData(menu, msg)
+   # await managerQR.testPhoto(msg)
 
 #     # Перебираем фотографии и обрабатываем их
 #     for photo in photos:
@@ -136,7 +135,9 @@ async def echo(msg: types.Message):
    # await kbs.get_next_kb(menu, msg, userInfo, isNew)
 
    # await bot.sendp.send_p.answer(msg.text)
-   await kbs.get_next_kb(menu, msg, bot)
+
+   if await kbs.testMenuYesNo(menu, msg) == False:
+      await kbs.get_next_kb(menu, msg, bot)
    
    # menu.writeMsg(msg)
    # await msg.answer(msg.text)

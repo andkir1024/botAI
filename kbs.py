@@ -70,19 +70,20 @@ class kbs:
         # переход к следующему меню
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu, msg, userInfo)
         if next_menu is not None:
-            msgNext = next_menu['next']
-            await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
-            
-            menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
-            await kbs.showAppParameters(selMenu, msg, bot)
+            if 'next' in next_menu:
+                msgNext = next_menu['next']
+                await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
+                
+                menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
+                await kbs.showAppParameters(selMenu, msg, bot)
 
-            if menuReply is not None:
-                userInfo.current_menu = msgNext
-                userInfo.save()
-                await msg.answer(title, reply_markup=menuReply)
-            else:
-                if title is not None:
-                    await msg.answer('ОШИБКА: '+title)
+                if menuReply is not None:
+                    userInfo.current_menu = msgNext
+                    userInfo.save()
+                    await msg.answer(title, reply_markup=menuReply)
+                else:
+                    if title is not None:
+                        await msg.answer('ОШИБКА: '+title)
             return
         # отрабатываем ввод данных
         else:
@@ -219,22 +220,58 @@ class kbs:
         if current_menu == "menuGetSupplies".lower():
             userInfo.okDeskInfo = msg.text+'\n'
             userInfo.save()
-            msgReply = menu.getAssisitans("base", "answer11", userInfo.assistant)
+            msgReply = menu.getAssisitans("base", "answer12", userInfo.assistant)
             await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+            
             return
         # 3 подтвердить доставку
         if current_menu == "menuConfirmDelivery".lower():
-            userInfo.okDeskInfo = msg.text+'\n'
-            userInfo.save()
             msgReply = menu.getAssisitans("base", "answer24", userInfo.assistant)
             await msg.answer(msgReply)
             return
 
-        await msg.answer("Непоняно")
+        await msg.answer("Непонятно")
         return
     
+    # сохранение данных для передачи
+    async def sendMediaData(menu, msg: types.Message):
+        userInfo, isNew = kbs.getMainUserInfo(msg)
+        current_menu = userInfo.current_menu.lower()
+        if current_menu == "menuConfirmDelivery".lower():
+            await kbs.gotoMenu(msg, menu, 'menuCorrespondsToAct', userInfo)
+            return True
+
+        return False
+    # проверка на выбор пункта меню в зависимости от места в обработке
+    async def testMenuYesNo(menu, msg: types.Message):
+        userInfo, isNew = kbs.getMainUserInfo(msg)
+        current_menu = userInfo.current_menu.lower()
+        if current_menu == "menuCorrespondsToAct".lower():
+            if msg.text.lower() == "да":
+                msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)
+                await msg.answer(msgReply)
+                await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+                return True
+            if msg.text.lower() == "нет":
+                msgReply = menu.getAssisitans("base", "answer27", userInfo.assistant)
+                await msg.answer(msgReply)
+                await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+                return True
+
+        return False
     # создание заявки
     async def createRequest(menu, current_menu, msg: types.Message, userInfo, msgNext):
         if msgNext.lower()=='menuCreateRequest'.lower():
             return
         return
+    # переход на меню по имени
+    async def gotoMenu(msg: types.Message, menu, menuName, userInfo):
+        msgNext = menuName
+        menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
+
+        if menuReply is not None:
+            userInfo.current_menu = msgNext
+            userInfo.save()
+            await msg.answer(title, reply_markup=menuReply)
+    
