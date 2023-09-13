@@ -164,7 +164,7 @@
 		},
 		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
 		{
-			"id":"clientAntiFrodMain",
+			"id":"menuPlaceIdclientAntiFrodMain",
 			"title":"Вы находитесь здесь?",
 			"menu":[
 				{
@@ -185,7 +185,7 @@
 		},
 		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
 		{
-			"id":"clientIntegrationMain",
+			"id":"menuPlaceIdclientIntegrationMain",
 			"title":"Вы находитесь здесь?",
 			"menu":[
 				{
@@ -272,7 +272,7 @@
 				},
 				{
 					"name":"Редактировать существующую заявку",
-					"next":"Start"
+					"next":"menuEditRequests"
 				},
 				{
 					"name":"Мой магазин",
@@ -290,8 +290,22 @@
 			"title":"меню чат бота для МВМ и Мегафон",
 			"menu":[
 				{
-					"name":"Запрос на гарантийный рез",
+					"name":"Создать новую заявку",
+					"next":"menuCreateRequest"
+				},
+				{
+					"name":"Редактировать существующую заявку",
 					"next":"Start"
+				},
+				{
+					"name":"Мой магазин",
+					"place":"0",
+					"next":"menuShop"
+				},
+				{
+					"name":"Запрос на гарантийный рез",
+					"place":"2",
+					"next":"menuRequestGaranty"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -305,8 +319,22 @@
 			"title":"меню чат бота для МТС и Билайн",
 			"menu":[
 				{
-					"name":"Рез по QR коду",
+					"name":"Создать новую заявку",
+					"next":"menuCreateRequest"
+				},
+				{
+					"name":"Редактировать существующую заявку",
 					"next":"Start"
+				},
+				{
+					"name":"Мой магазин",
+					"place":"0",
+					"next":"menuShop"
+				},
+				{
+					"name":"Рез по QR коду",
+					"place":"2",
+					"next":"menuRequestQR"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -440,6 +468,39 @@
 					"place":"2"
 					// "next":"menuCorrespondsToActNo"
 				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню запрос на гарантийный рез
+		{
+			"id":"menuRequestGaranty",
+			"title":"answer15",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню запрос на рез по QR
+		{
+			"id":"menuRequestQR",
+			"title":"answer20",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню редактировать существующую заявку (последние 5, даже закрытые)
+		{
+			"id":"menuEditRequests",
+			"title":"редактировать существующую заявку",
+			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
 					"next":"start"

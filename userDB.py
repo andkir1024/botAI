@@ -13,6 +13,7 @@ class user:
     assistant : userAssistant
     current_menu : str
     okDeskInfo : str
+    okDeskUserId : int
     data : str
     userType : str
     # информация выводимая ботом для конкретного пользователя
@@ -29,7 +30,8 @@ class user:
         self.okDeskInfo = ""
         self.data = ""
         self.infoMode = infoShow.undifined
-        self.userType = userType.undifined
+        self.userType = userType.client
+        self.okDeskUserId = -1
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -44,7 +46,8 @@ class user:
         self.okDeskInfo = ""
         self.data = ""
         self.infoMode = infoShow.undifined
-        self.userType = userType.undifined
+        self.userType = userType.client
+        self.okDeskUserId = -1
         
     def save(self):
         # return

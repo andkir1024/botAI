@@ -34,6 +34,27 @@ class okDesk:
         return resMaintenance
 
     # запрос на расположение устройства по shop_code (торговая точка)
+    def getListReqwests(idUser):
+        statusAdd = '&status_not[]=closed&status_not[]=Allow_auto';
+		
+        # URLrequest = 'https://insitech.okdesk.ru/api/v1/issues/count?' + mainConst.OKDESK_TOKEN +  '&contact_ids[]=' + idUser + statusAdd
+        URLrequest = 'https://insitech.okdesk.ru/api/v1/issues/count?' + mainConst.OKDESK_TOKEN +  '&contact_ids[]=' + str(idUser)
+        res = requests.get(URLrequest).json()
+        if 'errors' in res:
+            return None
+        if len(res) == 0:
+            return None
+        resOut = res[-5:]
+        resOut = resOut[::-1]
+        msgs = []
+        for requestiD in resOut:
+            URLrequest = 'https://insitech.okdesk.ru/api/v1/issues/' + str(requestiD) + '?' + mainConst.OKDESK_TOKEN
+            res = requests.get(URLrequest).json()
+            msg = f"id={requestiD} : {res['title']} : {res['created_at']}"
+            msgs.append(msg)
+        return msgs
+
+    # запрос на расположение устройства по shop_code (торговая точка)
     def findPlaceEquipmentByShopId(shop_code):
         # Поиск торговой точки
         URL = 'https://insitech.okdesk.ru/api/v1/maintenance_entities/?' + mainConst.OKDESK_TOKEN +  '&search_string=' + str(shop_code)
@@ -61,6 +82,10 @@ class okDesk:
             return res['id']
         return None
 
+    def getUserByPhone(userInfo):
+        phone = userInfo.phone
+        idUser = okDesk.findUserByPhone(phone)
+        return idUser
 
     # создание пользователя
     def postOkDeskCreateUser(userInfo):

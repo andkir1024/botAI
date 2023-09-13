@@ -72,7 +72,14 @@ class kbs:
         if next_menu is not None:
             if 'next' in next_menu:
                 msgNext = next_menu['next']
-                await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
+
+                # создание списка заявок (если в этом режиме)
+                RequestList = await kbs.createRequestList(menu, current_menu, msg, userInfo, msgNext)
+                if RequestList is not None:
+                    return
+
+                # создание заявки (если в этом режиме)
+                Request = await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
                 
                 menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
                 await kbs.showAppParameters(selMenu, msg, bot)
@@ -247,6 +254,8 @@ class kbs:
     async def testMenuYesNo(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
         current_menu = userInfo.current_menu.lower()
+        # if current_menu == "menuEditRequests".lower():
+        #     return
         if current_menu == "menuCorrespondsToAct".lower():
             if msg.text.lower() == "да":
                 msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)
@@ -260,11 +269,18 @@ class kbs:
                 return True
 
         return False
+    # создание меню с списком заявок
+    async def createRequestList(menu, current_menu, msg: types.Message, userInfo, msgNext):
+        if msgNext.lower()=='menuEditRequests'.lower():
+            requsts = okDesk.getListReqwests(userInfo.okDeskUserId)
+
+            return True
+        return False
     # создание заявки
     async def createRequest(menu, current_menu, msg: types.Message, userInfo, msgNext):
         if msgNext.lower()=='menuCreateRequest'.lower():
-            return
-        return
+            return True
+        return False
     # переход на меню по имени
     async def gotoMenu(msg: types.Message, menu, menuName, userInfo):
         msgNext = menuName
