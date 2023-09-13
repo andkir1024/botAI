@@ -208,11 +208,25 @@ class kbs:
 
         # ---------------------------------------------------------------------------------
         # создание завки
-        # Обратиться в поддержку
+        # 1 Обратиться в поддержку
         if current_menu == "menuCreateRequestSupport".lower():
             userInfo.okDeskInfo = msg.text+'\n'
             userInfo.save()
             msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
+            await msg.answer(msgReply)
+            return
+        # 2 запросить расходники
+        if current_menu == "menuGetSupplies".lower():
+            userInfo.okDeskInfo = msg.text+'\n'
+            userInfo.save()
+            msgReply = menu.getAssisitans("base", "answer11", userInfo.assistant)
+            await msg.answer(msgReply)
+            return
+        # 3 подтвердить доставку
+        if current_menu == "menuConfirmDelivery".lower():
+            userInfo.okDeskInfo = msg.text+'\n'
+            userInfo.save()
+            msgReply = menu.getAssisitans("base", "answer24", userInfo.assistant)
             await msg.answer(msgReply)
             return
 

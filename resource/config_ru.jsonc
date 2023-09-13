@@ -345,16 +345,16 @@
 				{
 					"name":"Добавить лекало",
 					"place":"0",
-					"next":"menuCreateRequestSupport"
+					"next":"menuAddLekalo"
 				},
 				{
 					"name":"Запросить расходники",
 					"place":"2",
-					"next":"menuCreateRequestSupport"
+					"next":"menuGetSupplies"
 				},
 				{
 					"name":"Подтвердить доставку",
-					"next":"menuCreateRequestSupport"
+					"next":"menuConfirmDelivery"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -377,6 +377,39 @@
 		{
 			"id":"menuCreateRequestSupport",
 			"title":"answer5",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню запросить расходники
+		{
+			"id":"menuGetSupplies",
+			"title":"answer11",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню подтвердить доставку
+		{
+			"id":"menuConfirmDelivery",
+			"title":"answer24",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
+		// меню добавить лекала
+		{
+			"id":"menuAddLekalo",
+			"title":"answer9",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
