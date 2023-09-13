@@ -188,6 +188,7 @@ class kbs:
                 await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientIntegrationMain')
             else:
                 await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdBad')
+            return
                 
 
         # ввод торговой точки
@@ -203,14 +204,19 @@ class kbs:
             msgReplay = res['name'] + '\n' + res['address']
             await msg.answer(msgReplay)
             await kbs.get_kb_by_idmenu(menu, msg, 'menuShopPlaceId')
+            return
 
         # ---------------------------------------------------------------------------------
         # создание завки
         # Обратиться в поддержку
         if current_menu == "menuCreateRequestSupport".lower():
-            # userInfo.okDeskInfo = msg.text+'\n'
-            # userInfo.save()
-            pass
+            userInfo.okDeskInfo = msg.text+'\n'
+            userInfo.save()
+            msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
+            await msg.answer(msgReply)
+            return
+
+        await msg.answer("Непоняно")
         return
     
     # создание заявки

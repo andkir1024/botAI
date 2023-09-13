@@ -40,7 +40,12 @@ class processorMenu:
         
         return greet_kb
     
-    def getAssisitans(self, typeBotTest, answerTest, assistance):
+    def findAppMsgPlace(self, text, appMsg):
+        place = text.find('#')
+        if place > 0 and appMsg is not None:
+            text = text.replace('#', appMsg)
+        return text
+    def getAssisitans(self, typeBotTest, answerTest, assistance, appMsg = None):
         typeBotTest = typeBotTest.lower()
         answerTest = answerTest.lower()
         assistance = str(assistance) 
@@ -58,7 +63,9 @@ class processorMenu:
                         text = answer['text']
                         lenText = len(text)
                         if assistance < lenText:
-                            return text[str(assistance)]
+                            textOut = self.findAppMsgPlace(text[str(assistance)], appMsg)
+                            return textOut
+                            # return text[str(assistance)]
                         return text['0']
         return None
     def testMsg(self, typeBot, msg, assistant):

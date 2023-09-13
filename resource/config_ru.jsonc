@@ -234,7 +234,7 @@
 				},
 				{
 					"name":"База знаний",
-					"next":"start"
+					"next":"menuDBKnown"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -298,7 +298,7 @@
 		// меню магазина
 		{
 			"id":"menuShop",
-			"title":"Мой магазин",
+			"title":"answer4",
 			"menu":[
 				{
 					"name":"Запросить обучение",
@@ -311,35 +311,6 @@
 				{
 					"name":"База знаний",
 					"next":"start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню сообщить о проблемк
-		{
-			"id":"menuProblem",
-			"title":"Выберете",
-			"menu":[
-				{
-					"name":"Проблема с поддержкой",
-					"next":"menuProblemDo"
-				},
-				{
-					"name":"Проблема с логистикой",
-					"place":"0",
-					"next":"menuProblemDo"
-				},
-				{
-					"name":"Проблема со складом",
-					"place":"2",
-					"next":"menuProblemDo"
-				},
-				{
-					"name":"Сообщить об ошибке ПО",
-					"next":"menuProblemDo"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -391,13 +362,24 @@
 				}
 			]
 		},
+		// меню база данных
+		{
+			"id":"menuDBKnown",
+			"title":"answer14",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"start"
+				}
+			]
+		},
 		// меню Обратиться в поддержку
 		{
 			"id":"menuCreateRequestSupport",
 			"title":"answer5",
 			"menu":[
 				{
-					"name":"Завершить обращение",
+					"name":"Вернуться в начальное меню",
 					"next":"start"
 				}
 			]
