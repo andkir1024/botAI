@@ -72,16 +72,19 @@ class kbs:
         if next_menu is not None:
             if 'next' in next_menu:
                 msgNext = next_menu['next']
+                menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
                 # создание списка заявок (если в этом режиме)
                 RequestList = await kbs.createRequestList(menu, current_menu, msg, userInfo, msgNext)
                 if RequestList is not None:
-                    return
+                    for request in RequestList:
+                        kb = KeyboardButton(request)
+                        menuReply.add(kb)
+                    pass
 
                 # создание заявки (если в этом режиме)
                 Request = await kbs.createRequest(menu, current_menu, msg, userInfo, msgNext)
                 
-                menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
                 await kbs.showAppParameters(selMenu, msg, bot)
 
                 if menuReply is not None:
@@ -237,6 +240,11 @@ class kbs:
             msgReply = menu.getAssisitans("base", "answer24", userInfo.assistant)
             await msg.answer(msgReply)
             return
+        # 4 редактирование заявки
+        if current_menu == "menuEditRequests".lower():
+            # msgReply = menu.getAssisitans("base", "answer24", userInfo.assistant)
+            # await msg.answer(msgReply)
+            return
 
         await msg.answer("Непонятно")
         return
@@ -273,9 +281,8 @@ class kbs:
     async def createRequestList(menu, current_menu, msg: types.Message, userInfo, msgNext):
         if msgNext.lower()=='menuEditRequests'.lower():
             requsts = okDesk.getListReqwests(userInfo.okDeskUserId)
-
-            return True
-        return False
+            return requsts
+        return None
     # создание заявки
     async def createRequest(menu, current_menu, msg: types.Message, userInfo, msgNext):
         if msgNext.lower()=='menuCreateRequest'.lower():
