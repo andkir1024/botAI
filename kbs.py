@@ -76,6 +76,10 @@ class kbs:
         if next_menu is not None:
             if 'next' in next_menu:
                 msgNext = next_menu['next']
+                if 'msg' in next_menu:
+                    msgReply = menu.getAssisitans("base", next_menu['msg'], userInfo.assistant)
+                    await msg.answer(msgReply)
+                    
                 menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
                 # создание списка заявок (если в этом режиме)

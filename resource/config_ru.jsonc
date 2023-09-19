@@ -566,9 +566,11 @@
 		{
 			"id":"menuGradeEmployer",
 			"title":"answer7",
+			"msg":"answer8",
 			"menu":[
 				{
 					"name":"Не оценивать",
+					"msg":"answer8",
 					"next":"StartFirstPure"
 				},
 				{
