@@ -225,6 +225,13 @@ class kbs:
             userInfo.save()
             msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
             await msg.answer(msgReply)
+            # test
+            await msg.answer("Сотрудник Иван Иванович взял заявку в работу")
+            await kbs.gotoMenu(msg, menu, 'menuGradeEmployer', userInfo)
+
+            # msgReply = menu.getAssisitans("base", "answer7", userInfo.assistant)
+            # await msg.answer(msgReply)
+
             return
         # 2 запросить расходники
         if current_menu == "menuGetSupplies".lower():
