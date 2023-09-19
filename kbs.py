@@ -234,8 +234,10 @@ class kbs:
             msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
             await msg.answer(msgReply)
             # test
-            await msg.answer("Сотрудник Иван Иванович взял заявку в работу")
-            await kbs.gotoMenu(msg, menu, 'menuFinalizeRequest', userInfo)
+            # await msg.answer("Сотрудник Иван Иванович взял заявку в работу")
+            # await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo)
+            # await kbs.gotoMenu(msg, menu, 'menuFinalizeRequest', userInfo)
+            await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, "Сотрудник Иван Иванович взял заявку в работу")
 
             # msgReply = menu.getAssisitans("base", "answer7", userInfo.assistant)
             # await msg.answer(msgReply)
@@ -304,12 +306,14 @@ class kbs:
             return True
         return False
     # переход на меню по имени
-    async def gotoMenu(msg: types.Message, menu, menuName, userInfo):
+    async def gotoMenu(msg: types.Message, menu, menuName, userInfo, titleExt = None):
         msgNext = menuName
         menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
         if menuReply is not None:
             userInfo.current_menu = msgNext
             userInfo.save()
+            if titleExt is not None:
+                title = titleExt
             await msg.answer(title, reply_markup=menuReply)
     
