@@ -23,7 +23,7 @@
 		// зарегистрироваться
 		{
 			"id":"Registry",
-			"title":"Выберете ассистента\n1. Армор Джекович - Мужчина средних лет, предпочитает официальный стиль речи, придерживается делового этикета.\n2. Джек -Молодой парень, предпочитает разговорный стиль речи, использует сленг.\n3. Армора - Энергичная девушка, предпочитает публицистический стиль речи, эмоциональна.",
+			"title":"Выберете ассистента\n1. Армор Джекович - Мужчина средних лет, предпочитает официальный стиль речи, придерживается делового этикета.\n2. Джек - Молодой парень, предпочитает разговорный стиль речи, использует сленг.\n3. Армора - Энергичная девушка, предпочитает публицистический стиль речи, эмоциональна.",
 			"typeBot":"base",
 			"menu":[
 				{
@@ -40,7 +40,7 @@
 				}
 			]
 		},
-		// зарегистрироваться
+		// начало работы вариант1
 		{
 			"id":"StartFirst",
 			"title":"answer1",
@@ -48,7 +48,23 @@
 			"menu":[
 				{
 					"name":"Начать",
-					"next":"start"
+					"next":"Start"
+				},
+				{
+					"name":"Сменить ассистента",
+					"next":"Registry"
+				}
+			]
+		},
+		// начало работы вариант1
+		{
+			"id":"StartFirstPure",
+			"title":"answer2",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Начать",
+					"next":"Start"
 				},
 				{
 					"name":"Сменить ассистента",
@@ -100,12 +116,12 @@
 			"id":"menuRequestDeviceId",
 			"title":"answer202",
 			// "video":"device_number.mp4",
-			"photo":"photo_2.png",
+			"photo":"photo_3.png",
 			// "url":"https://yandex.com/",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -113,14 +129,15 @@
 		{
 			"id":"menuEditPointId",
 			"title":"answer204",
-			"photo":"photo_3.png",
+			"photo":"photo_2.png",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
+		// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"SelectPlotterByQRMenu",
 			"title":"answer203",
@@ -128,7 +145,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"Start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -137,26 +154,26 @@
 		// меню запроса  и подтверждения места расположения (для номера плоттера)
 
 		// меню чат бота для сотрудников
-		{
-			"id":"menuPlaceIdemployerMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuPlaceIdemployer"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
-					"next":"menuRequestDeviceId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
+		// {
+		// 	"id":"menuPlaceIdemployerMain",
+		// 	"title":"Вы находитесь здесь?",
+		// 	"menu":[
+		// 		{
+		// 			"name":"Да",
+		// 			"place":"0",
+		// 			"next":"menuPlaceIdemployer"
+		// 		},
+		// 		{
+		// 			"name":"Нет",
+		// 			"place":"2",
+		// 			"next":"menuRequestDeviceId"
+		// 		},
+		// 		{
+		// 			"name":"Вернуться в начальное меню",
+		// 			"next":"StartFirstPure"
+		// 		}
+		// 	]
+		// },
 		// меню чат бота для клиентов
 		{
 			"id":"menuPlaceIdclientMain",
@@ -174,7 +191,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -195,7 +212,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -216,7 +233,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -227,7 +244,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -250,7 +267,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -273,7 +290,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -296,7 +313,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -311,7 +328,7 @@
 				},
 				{
 					"name":"Редактировать существующую заявку",
-					"next":"Start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Мой магазин",
@@ -325,7 +342,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -340,7 +357,7 @@
 				},
 				{
 					"name":"Редактировать существующую заявку",
-					"next":"Start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Мой магазин",
@@ -354,7 +371,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -365,19 +382,19 @@
 			"menu":[
 				{
 					"name":"Запросить обучение",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Сотрудник AJ",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"База знаний",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -388,11 +405,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -421,7 +438,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -432,7 +449,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -443,7 +460,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -454,7 +471,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -465,7 +482,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -486,7 +503,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -497,7 +514,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -508,7 +525,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -519,7 +536,29 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
+				}
+			]
+		},
+		// меню завершения обращения
+		{
+			"id":"menuFinalizeRequest",
+			"title":"answer7",
+			"menu":[
+				{
+					"name":"Завершить обращение",
+					"next":"menuGradeEmployer"
+				}
+			]
+		},
+		// меню продолжение обращения
+		{
+			"id":"menuContinueRequest",
+			"title":"answer5",
+			"menu":[
+				{
+					"name":"Завершить обращение",
+					"next":"menuGradeEmployer"
 				}
 			]
 		},
@@ -530,16 +569,16 @@
 			"menu":[
 				{
 					"name":"Не оценивать",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Обращение не завершено",
-					"next":"start"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"menuContinueRequest"
 				}
+				// {
+				// 	"name":"Вернуться в начальное меню",
+				// 	"next":"StartFirstPure"
+				// }
 			]
 		},
 		// меню добавить лекала
@@ -549,7 +588,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		}

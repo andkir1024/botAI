@@ -231,7 +231,7 @@ class kbs:
             await msg.answer(msgReply)
             # test
             await msg.answer("Сотрудник Иван Иванович взял заявку в работу")
-            await kbs.gotoMenu(msg, menu, 'menuGradeEmployer', userInfo)
+            await kbs.gotoMenu(msg, menu, 'menuFinalizeRequest', userInfo)
 
             # msgReply = menu.getAssisitans("base", "answer7", userInfo.assistant)
             # await msg.answer(msgReply)
