@@ -98,9 +98,9 @@
 		// меню запроса номера оборудования
 		{
 			"id":"menuRequestDeviceId",
-			"title":"Введите 4-значный номер плоттера (указан на задней крышке экрана)",
-			"video":"device_number.mp4",
-			// "photo":"photo_0.jpg",
+			"title":"answer202",
+			// "video":"device_number.mp4",
+			"photo":"photo_2.png",
 			// "url":"https://yandex.com/",
 			"menu":[
 				{
@@ -112,8 +112,8 @@
 		// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"menuEditPointId",
-			"title":"ВВедите код торговой точки: ",
-			"photo":"photo_0.jpg",
+			"title":"answer204",
+			"photo":"photo_3.png",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
@@ -123,8 +123,8 @@
 		},
 		{
 			"id":"SelectPlotterByQRMenu",
-			"title":"Сканируйте QR код плоттера",
-			"photo":"photo_0.jpg",
+			"title":"answer203",
+			"photo":"photo_4.png",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
