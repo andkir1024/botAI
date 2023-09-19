@@ -61,11 +61,15 @@ class kbs:
             menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
             if menuReply is not None:
-                titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
-                await msg.answer(titleTmp)
+                # titleTmp = menu.getAssisitans('base', 'answer1', userInfo.assistant)
+                # await msg.answer(titleTmp)
+                # userInfo.current_menu = msgNext
+                # userInfo.save()
+                # await msg.answer(title, reply_markup=menuReply)
+
                 userInfo.current_menu = msgNext
                 userInfo.save()
-                await msg.answer(title, reply_markup=menuReply)
+                await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
             return
         # переход к следующему меню
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu, msg, userInfo)

@@ -28,15 +28,31 @@
 			"menu":[
 				{
 					"name":"Армор Джекович",
-					"next":"start"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Джек",
-					"next":"start"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Армора",
+					"next":"StartFirst"
+				}
+			]
+		},
+		// зарегистрироваться
+		{
+			"id":"StartFirst",
+			"title":"answer1",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Начать",
 					"next":"start"
+				},
+				{
+					"name":"Сменить ассистента",
+					"next":"Registry"
 				}
 			]
 		},
