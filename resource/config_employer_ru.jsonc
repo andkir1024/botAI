@@ -75,9 +75,9 @@
 				}
 			]
 		},
-		// начало работы
+		// создание заявки
 		{
-			"id":"Start",
+			"id":"StartReguest",
 			"title":"answer2",
 			"typeBot":"base",
 			"menu":[
@@ -173,6 +173,29 @@
 				}
 			]
 		},
+		// начальное меню чат бота для сотрудников
+		{
+			"id":"Start",
+			"title":"Выберете",
+			"menu":[
+				{
+					"name":"Сообщить о проблеме",
+					"next":"menuProblem"
+				},
+				{
+					"name":"Создать заявку",
+					"next":"StartReguest"
+				},
+				{
+					"name":"База данных",
+					"next":"menuDBKnown"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"StartFirstPure"
+				}
+			]
+		},
 		// меню чат бота для сотрудников
 		{
 			"id":"menuProblem",
@@ -198,7 +221,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -209,11 +232,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -223,11 +246,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -237,11 +260,22 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"start"
+					"next":"StartFirstPure"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
+				}
+			]
+		},
+		// меню база данных
+		{
+			"id":"menuDBKnown",
+			"title":"answer14",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -252,7 +286,7 @@
 			"menu":[
 				{
 					"name":"Завершить обращение",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		}
