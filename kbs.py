@@ -318,6 +318,16 @@ class kbs:
             else:
                 await kbs.doEquipmentByInvetoryId(menu, current_menu, msg, userInfo, InvetoryId)
             return True
+        # передача фотографий в режиме (рез по QR коду)
+        if current_menu == "menuRequestQR".lower():
+            msgReply = menu.getAssisitans("base", "answer23", userInfo.assistant)
+            await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo, msgReply)
+            return True
+        # передача фотографий в режиме (запрос на гарантию)
+        if current_menu == "menuRequestGaranty".lower():
+            msgReply = menu.getAssisitans("base", "answer16", userInfo.assistant)
+            await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo, msgReply)
+            return True
         # передача фотографий в режиме (добавить лекало)
         if current_menu == "menuAddLekalo".lower():
             # if 'msg' in next_menu:
@@ -331,19 +341,9 @@ class kbs:
                 await msg.answer(msgReply)
                 userInfo.save(False)
                 return True
-            # if userInfo.counter == 1:
-            #     msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant)
-            #     userInfo.counter += 1
-            #     await msg.answer(msgReply)
-            #     userInfo.save(False)
-            #     return True
             if userInfo.counter == 1:
-                # msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant)
-                # await msg.answer(msgReply)
                 userInfo.save()
                 msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
-                # await msg.answer(msgReply)
-                # await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, "Сотрудник Иван Иванович взял заявку в работу")
                 await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, msgReply)
                 return True
             return True
