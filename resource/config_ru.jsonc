@@ -382,6 +382,7 @@
 			"menu":[
 				{
 					"name":"Запросить обучение",
+					"id":"requestTraining",
 					"next":"StartFirstPure"
 				},
 				{
@@ -390,6 +391,7 @@
 				},
 				{
 					"name":"База знаний",
+					"id":"requestDataBase",
 					"next":"StartFirstPure"
 				},
 				{
@@ -571,7 +573,7 @@
 				{
 					"name":"Не оценивать",
 					"msg":"answer8",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Обращение не завершено",

@@ -1,5 +1,6 @@
 import html
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from managerQR import managerQR
 from okDeskUtils import okDesk
 from processorMenu import *
 from aiogram.types import InputFile
@@ -9,7 +10,7 @@ class kbs:
         kb_clients = ReplyKeyboardMarkup(resize_keyboard=True)
         b2 = KeyboardButton('Зарегистрироваться', request_contact=True)
         kb_clients.add(b2)
-        return kb_clients, 'Для начала работы нам нужно зарегистрироваться', 'menuPhone'
+        return kb_clients, 'Для начала работы нам нужно зарегистрироваться', 'menuPhone' 
 
     def get_kb(menu, msg: types.Message, userInfo, isNew) -> ReplyKeyboardMarkup:
         msgCmd = msg.text
@@ -18,6 +19,8 @@ class kbs:
             msgCmd = msgCmd[1:]
         if isNew:
             msgCmd = 'Registry'
+        if msgCmd == 'start':
+            msgCmd = 'StartFirst'
         menuReply, title, selMenu = menu.getMenu(msgCmd, msg, userInfo)
         return menuReply, title, msgCmd
             
@@ -81,6 +84,17 @@ class kbs:
                     await msg.answer(msgReply)
                     
                 menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
+
+                # режим мой магазин
+                if current_menu == 'menuShop'.lower():
+                    if 'id' in next_menu:
+                        id = next_menu['id'].lower()
+                        if id == 'requestTraining'.lower():
+                            msgReply = menu.getAssisitans("base", 'answer13', userInfo.assistant)
+                            await msg.answer(msgReply)
+                        if id == 'requestDataBase'.lower():
+                            msgReply = menu.getAssisitans("base", 'answer14', userInfo.assistant)
+                            await msg.answer(msgReply)
 
                 # создание списка заявок (если в этом режиме)
                 RequestList = await kbs.createRequestList(menu, current_menu, msg, userInfo, msgNext)
@@ -182,6 +196,29 @@ class kbs:
         return userInfo, isNew
     
 
+    async def doEquipmentByInvetoryId(menu, current_menu, msg: types.Message, userInfo, InvetoryId):
+        res = okDesk.findPlaceEquipmentByInvetoryId(InvetoryId)
+        if res is None:
+            await msg.answer("Оборудование не найдено. Повторите!")
+            return
+        userInfo.okDeskInfo = InvetoryId
+        userInfo.save()
+        
+        msgReplay = res['name'] + '\n' + res['address']
+        userInfo, isNew = kbs.getMainUserInfo(msg)
+        await msg.answer(msgReplay)
+        if userInfo.userType == 'employer':
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdemployerMain')
+        elif userInfo.userType == 'client':
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientMain')
+        elif userInfo.userType == 'clientAntiFrod':
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientAntiFrodMain')
+        elif userInfo.userType == 'clientIntegration':
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdclientIntegrationMain')
+        else:
+            await kbs.get_kb_by_idmenu(menu, msg, 'menuPlaceIdBad')
+        return
+
     # отработка введенных данных
     async def getUserData(menu, current_menu, msg: types.Message, userInfo):
         # ввод номера плоттера
@@ -249,7 +286,7 @@ class kbs:
             userInfo.save()
             msgReply = menu.getAssisitans("base", "answer12", userInfo.assistant)
             await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+            await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
             
             return
         # 3 подтвердить доставку
@@ -266,12 +303,20 @@ class kbs:
         await msg.answer("Непонятно")
         return
     
-    # сохранение данных для передачи
     async def sendMediaData(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
         current_menu = userInfo.current_menu.lower()
+        # сохранение данных для передачи
         if current_menu == "menuConfirmDelivery".lower():
             await kbs.gotoMenu(msg, menu, 'menuCorrespondsToAct', userInfo)
+            return True
+        # проверка qr кода плоттера для анализа его адреса
+        if current_menu == "SelectPlotterByQRMenu".lower():
+            InvetoryId = await managerQR.getQr(msg, userInfo)
+            if InvetoryId is None:
+                await msg.answer("Не QR код. Повторите ввод")
+            else:
+                await kbs.doEquipmentByInvetoryId(menu, current_menu, msg, userInfo, InvetoryId)
             return True
 
         return False
@@ -285,12 +330,12 @@ class kbs:
             if msg.text.lower() == "да":
                 msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)
                 await msg.answer(msgReply)
-                await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+                await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
                 return True
             if msg.text.lower() == "нет":
                 msgReply = menu.getAssisitans("base", "answer27", userInfo.assistant)
                 await msg.answer(msgReply)
-                await kbs.gotoMenu(msg, menu, 'StartPure', userInfo)
+                await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
                 return True
 
         return False

@@ -1,6 +1,7 @@
 from processorQR import *
 from aiogram import types
 from kbs import *
+from commonData import *
 import time
 import os
 
@@ -37,6 +38,17 @@ class managerQR:
 
         return None
 
+    async def getQr(message: types.Message, userInfo):
+        photo = message.photo[-1]
+        photo_id = photo.file_unique_id
+        photo_name = f'tempData/{photo_id}.jpg'     
+
+        await photo.download(photo_name)
+        # raw = await photo.download()
+        resultQR =  await managerQR.decodePhoto(message, photo_name, userInfo)
+        result = managerQR.isPlotterQRplotter(resultQR, userInfo.current_menu)
+        return result
+
     async def decodePhoto(message: types.Message, photo_name, userInfo):
         timeStart = time.time()
         resultQR = decodeImage(photo_name, decodeQRMode.onlyQR)
@@ -50,4 +62,11 @@ class managerQR:
         return resultQR
 
     def isPlotterQRplotter(qrvalue, cmd):
-        return cmd
+        if len(qrvalue) == 1:
+            paramsResult = qrvalue[0].split("\n")
+            if len(paramsResult) >= 4:
+                hardware = paramsResult[0]
+                hardwareAll = hardware.split("=")
+                if len(hardwareAll) == 2:
+                    return hardwareAll[1]
+        return None
