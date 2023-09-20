@@ -7,6 +7,8 @@
 // "type" тип заявки (передается сверху вниз) если нет берется из верхнего уровня (по умолчанию incident) 
 // "role" тип заявки (передается сверху вниз) если нет берется из верхнего уровня (по умолчанию incident) 
 // "kb" тип клавиатуры (inline, reply)
+// "msg" сообщение от бота
+// меню для сотрудников
 
 	"menus":[
 		// читать номер телефона 
@@ -41,7 +43,7 @@
 				}
 			]
 		},
-		// зарегистрироваться
+		// начало работы вариант1
 		{
 			"id":"StartFirst",
 			"title":"answer1",
@@ -49,7 +51,23 @@
 			"menu":[
 				{
 					"name":"Начать",
-					"next":"start"
+					"next":"Start"
+				},
+				{
+					"name":"Сменить ассистента",
+					"next":"Registry"
+				}
+			]
+		},
+		// начало работы вариант1
+		{
+			"id":"StartFirstPure",
+			"title":"answer2",
+			"typeBot":"base",
+			"menu":[
+				{
+					"name":"Начать",
+					"next":"Start"
 				},
 				{
 					"name":"Сменить ассистента",
@@ -64,73 +82,21 @@
 			"typeBot":"base",
 			"menu":[
 				{
-					"name":"Сообщить о проблеме",
-					"next":"menuProblem"
-				},
-				{
-					"name":"Создать заявку",
-					"next":"menuCreateRequest"
-				},
-				{
-					"name":"База знаний",
-					"next":"menuDBKnown"
-				}
-			]
-		},
-		// меню чат бота для сотрудников
-		{
-			"id":"menuPlaceIdemployerMain",
-			"title":"Вы находитесь здесь?",
-			"menu":[
-				{
-					"name":"Да",
-					"place":"0",
-					"next":"menuPlaceIdemployer"
-				},
-				{
-					"name":"Нет",
-					"place":"2",
+					"name":"Номер плоттера",
 					"next":"menuRequestDeviceId"
 				},
 				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},	
-		// меню чат бота для сотрудников
-		{
-			"id":"menuPlaceIdemployer",
-			"title":"меню чат бота для сотрудников",
-			"menu":[
-				{
-					"name":"Добавить/Поправить лекало",
-					"next":"menuProblemDo"
+					"name":"Фотография QR кода плоттера",
+					"next":"SelectPlotterByQRMenu"
 				},
 				{
-					"name":"Временный доступ к точке",
-					"next":"menuProblemDo"
-				},
-				{
-					"name":"Смена типа резв",
-					"next":"menuProblemDo"
-				},
-				{
-					"name":"Закрытие торговой точки",
-					"next":"menuProblemDoB"
-				},
-				{
-					"name":"Открытие торговой точки",
-					"next":"menuProblemDoA"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"name":"Код торговой точки",
+					"next":"menuEditPointId"
 				}
 			]
 		},			
 		{
-			"id":"menuCreateRequest",
+			"id":"StartPure",
 			"title":"answer2",
 			"typeBot":"base",
 			"menu":[
@@ -145,58 +111,44 @@
 				{
 					"name":"Код торговой точки",
 					"next":"menuEditPointId"
-				},
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
-			]
-		},
-		// меню база данных
-		{
-			"id":"menuDBKnown",
-			"title":"answer14",
-			"menu":[
-				{
-					"name":"Вернуться в начальное меню",
-					"next":"start"
-				}
+								}
 			]
 		},
 		// меню запроса номера оборудования
 		{
 			"id":"menuRequestDeviceId",
-			"title":"Введите 4-значный номер плоттера (указан на задней крышке экрана)",
-			"video":"device_number.mp4",
-			// "photo":"photo_0.jpg",
+			"title":"answer202",
+			// "video":"device_number.mp4",
+			"photo":"photo_3.png",
 			// "url":"https://yandex.com/",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
 		// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"menuEditPointId",
-			"title":"ВВедите код торговой точки: ",
-			"photo":"photo_0.jpg",
+			"title":"answer204",
+			"photo":"photo_2.png",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
+// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"SelectPlotterByQRMenu",
-			"title":"Сканируйте QR код плоттера",
-			"photo":"photo_0.jpg",
+			"title":"answer203",
+			"photo":"photo_4.png",
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"Start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
@@ -217,11 +169,11 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"start"
+					"next":"StartFirstPure"
 				}
 			]
 		},
-		// меню сообщить о проблемк
+		// меню чат бота для сотрудников
 		{
 			"id":"menuProblem",
 			"title":"Выберете",

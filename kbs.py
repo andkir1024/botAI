@@ -182,9 +182,9 @@ class kbs:
                     if param == paramName:
                         value = pieces[2]
                         await msg.answer(f"Параметр {paramName} изменен на {value}")
-                        exec(f"userInfo.{paramName} = {value}")
+                        exec(f"userInfo.{paramName} = userType.{value}")
                         paramName = value
-                        # userInfo.save()
+                        userInfo.save()
                         return
                 await msg.answer("Параметр не нрайден")
             else:
