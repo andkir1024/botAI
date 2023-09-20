@@ -318,14 +318,42 @@ class kbs:
             else:
                 await kbs.doEquipmentByInvetoryId(menu, current_menu, msg, userInfo, InvetoryId)
             return True
+        # передача фотографий в режиме (добавить лекало)
+        if current_menu == "menuAddLekalo".lower():
+            # if 'msg' in next_menu:
+            # exec(f"userInfo.{counter} = 0")
+            # exec(userInfo.counter = 0)
+            if userInfo.counter < 0:
+                userInfo.counter = 0
+            if userInfo.counter == 0:
+                msgReply = menu.getAssisitans("base", "answer10", userInfo.assistant)
+                userInfo.counter += 1
+                await msg.answer(msgReply)
+                userInfo.save(False)
+                return True
+            # if userInfo.counter == 1:
+            #     msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant)
+            #     userInfo.counter += 1
+            #     await msg.answer(msgReply)
+            #     userInfo.save(False)
+            #     return True
+            if userInfo.counter == 1:
+                # msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant)
+                # await msg.answer(msgReply)
+                userInfo.save()
+                msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
+                # await msg.answer(msgReply)
+                # await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, "Сотрудник Иван Иванович взял заявку в работу")
+                await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, msgReply)
+                return True
+            return True
 
         return False
     # проверка на выбор пункта меню в зависимости от места в обработке
     async def testMenuYesNo(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
         current_menu = userInfo.current_menu.lower()
-        # if current_menu == "menuEditRequests".lower():
-        #     return
+
         if current_menu == "menuCorrespondsToAct".lower():
             if msg.text.lower() == "да":
                 msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)

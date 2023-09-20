@@ -16,6 +16,7 @@ class user:
     okDeskUserId : int
     data : str
     userType : str
+    counter : int
     # информация выводимая ботом для конкретного пользователя
     infoMode : int
     def __init__(self):
@@ -32,6 +33,7 @@ class user:
         self.infoMode = infoShow.undifined
         self.userType = userType.client
         self.okDeskUserId = -1
+        self.counter = -1
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -48,9 +50,12 @@ class user:
         self.infoMode = infoShow.undifined
         self.userType = userType.client
         self.okDeskUserId = -1
+        self.counter = -1
         
-    def save(self):
-        # return
+    def save(self, clearCounter = True):
+        if clearCounter:
+            self.counter = -1
+
         s = json.dumps(self.__dict__)
         fileUser = user.getFileName(self.id)
         with open(fileUser, "w") as text_file:
@@ -62,8 +67,15 @@ class user:
         exists = os.path.exists(fileUser)
         if exists:
             f = open(fileUser)
-            data = json.load(f)
-            self.__dict__ = data
+            try:
+                data = json.load(f)
+                self.__dict__ = data
+            except:
+                pass
+            try:
+                aa = self.counter
+            except:
+                exec("self.counter=-1")
             return
         return
 
