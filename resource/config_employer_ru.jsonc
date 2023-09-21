@@ -254,22 +254,27 @@
 			"menu":[
 				{
 					"name":"Добавить/Поправить лекало",
+					"id":"addLekalo",
 					"next":"StartFirst"
 				},
 				{
 					"name":"Временный доступ к точке",
+					"id":"tempLekalo",
 					"next":"StartFirst"
 				},
 				{
 					"name":"Смена типа реза",
+					"id":"changeCut",
 					"next":"StartFirst"
 				},
 				{
 					"name":"Закрытие торговой точки",
+					"id":"closePoint",
 					"next":"StartFirst"
 				},
 				{
 					"name":"Открытие торговой точки",
+					"id":"openPoint",
 					"next":"StartFirst"
 				},
 				{
@@ -318,6 +323,45 @@
 				{
 					"name":"Вернуться в начальное меню",
 					"next":"StartFirst"
+				}
+			]
+		},
+		// меню ожидания комментариев
+		{
+			"id":"menuWaitComment",
+			"title":"answer29",
+			"menu":[
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"StartFirst"
+				}
+			]
+		},
+		// меню продолжение обращения
+		{
+			"id":"menuContinueRequest",
+			"title":"answer7",
+			"menu":[
+				{
+					"name":"Завершить обращение",
+					"next":"menuGradeEmployer"
+				}
+			]
+		},
+		// меню оценки сотрудника
+		{
+			"id":"menuGradeEmployer",
+			"title":"answer7",
+			"msg":"answer8",
+			"menu":[
+				{
+					"name":"Не оценивать",
+					"msg":"answer8",
+					"next":"StartFirst"
+				},
+				{
+					"name":"Обращение не завершено",
+					"next":"menuContinueRequest"
 				}
 			]
 		},

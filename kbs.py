@@ -85,6 +85,25 @@ class kbs:
                     
                 menuReply, title, selMenu = menu.getMenu(msgNext, msg, userInfo)
 
+                # режим сотрудников
+                if current_menu == 'menuEmployer'.lower():
+                    if 'id' in next_menu:
+                        id = next_menu['id'].lower()
+                        if id == 'addLekalo'.lower() or id == 'tempLekalo'.lower() or id == 'changeCut'.lower():
+                            msgReply = menu.getAssisitans("base", 'answer30', userInfo.assistant)
+                            # await msg.answer(msgReply)
+                            await kbs.gotoMenu(msg, menu, 'menuWaitComment', userInfo, msgReply)
+                            
+                        if id == 'closePoint'.lower():
+                            msgReply = menu.getAssisitans("base", 'answer29', userInfo.assistant)
+                            await kbs.gotoMenu(msg, menu, 'menuWaitComment', userInfo, msgReply)
+                            # await msg.answer(msgReply)
+                        if id == 'openPoint'.lower():
+                            msgReply = menu.getAssisitans("base", 'answer28', userInfo.assistant)
+                            await kbs.gotoMenu(msg, menu, 'menuWaitComment', userInfo, msgReply)
+                            # await msg.answer(msgReply)
+                        return
+
                 # режим мой магазин
                 if current_menu == 'menuShop'.lower():
                     if 'id' in next_menu:
@@ -265,6 +284,12 @@ class kbs:
 
         # проблема с поддержкой
         if current_menu == "menuProblemDo".lower():
+            return
+        # ожидание комментарев для сотрудников
+        if current_menu == "menuWaitComment".lower():
+            msgReply = menu.getAssisitans("base", "answer6", userInfo.assistant, "12345678")
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'menuContinueRequest', userInfo, "Сотрудник Иван Иванович взял заявку в работу")
             return
         # ---------------------------------------------------------------------------------
         # создание завки
