@@ -77,7 +77,7 @@
 		},
 		// начало работы
 		{
-			"id":"Start",
+			"id":"StartReguest",
 			"title":"answer2",
 			"typeBot":"base",
 			"menu":[
@@ -140,7 +140,7 @@
 				}
 			]
 		},
-// меню выбора компании торговой точки (предложено выбрать)
+		// меню выбора компании торговой точки (предложено выбрать)
 		{
 			"id":"SelectPlotterByQRMenu",
 			"title":"answer203",
@@ -160,13 +160,13 @@
 				{
 					"name":"Да",
 					"place":"0",
-					// "next":"menuPartnerWithoutIntegration"
-"next":"menuPlaceIdclient"
+					// "next":"menuPlaceIdclient"
+					"next":"menuEmployer"
 				},
 				{
 					"name":"Нет",
 					"place":"2",
-					"next":"menuEditPointId"
+					"next":"StartReguest"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -219,6 +219,58 @@
 				{
 					"name":"Сообщить об ошибке ПО",
 					"next":"menuProblemDo"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"StartFirst"
+				}
+			]
+		},
+		// меню чат бота для сотрудников
+		{
+			"id":"menuPlaceIdemployerMain",
+			"title":"answer3",
+			"menu":[
+				{
+					"name":"Да",
+					"place":"0",
+					"next":"menuEmployer"
+				},
+				{
+					"name":"Нет",
+					"place":"2",
+					"next":"StartReguest"
+				},
+				{
+					"name":"Вернуться в начальное меню",
+					"next":"StartFirst"
+				}
+			]
+		},
+		// меню чат бота для сотрудников
+		{
+			"id":"menuEmployer",
+			"title":"answer301",
+			"menu":[
+				{
+					"name":"Добавить/Поправить лекало",
+					"next":"StartFirst"
+				},
+				{
+					"name":"Временный доступ к точке",
+					"next":"StartFirst"
+				},
+				{
+					"name":"Смена типа реза",
+					"next":"StartFirst"
+				},
+				{
+					"name":"Закрытие торговой точки",
+					"next":"StartFirst"
+				},
+				{
+					"name":"Открытие торговой точки",
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",

@@ -152,7 +152,8 @@ class kbs:
             userInfo.current_menu = msgCmd
             userInfo.save()
             await msg.answer(title, reply_markup=menuReply)
-        return
+        else:
+            await msg.answer(f"ОШИБКА: меню {msgCmd} не найдено")
 
     async def setInfoMode(msg: types.Message):
         # userCurrent = userDB(True)
@@ -262,6 +263,9 @@ class kbs:
             await kbs.get_kb_by_idmenu(menu, msg, 'menuShopPlaceId')
             return
 
+        # проблема с поддержкой
+        if current_menu == "menuProblemDo".lower():
+            return
         # ---------------------------------------------------------------------------------
         # создание завки
         # 1 Обратиться в поддержку
