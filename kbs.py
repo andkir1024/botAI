@@ -201,7 +201,7 @@ class kbs:
         if res is None:
             await msg.answer("Оборудование не найдено. Повторите!")
             return
-        userInfo.okDeskInfo = InvetoryId
+        userInfo.okDeskInfo =  'hardNum=' + InvetoryId
         userInfo.save()
         
         msgReplay = res['name'] + '\n' + res['address']
@@ -228,7 +228,7 @@ class kbs:
             if res is None:
                 await msg.answer("Оборудование не найдено. Повторите!")
                 return
-            userInfo.okDeskInfo = msg.text
+            userInfo.okDeskInfo = 'hardNum=' + msg.text
             userInfo.save()
             
             msgReplay = res['name'] + '\n' + res['address']
@@ -254,7 +254,7 @@ class kbs:
             if res is None:
                 await msg.answer("Точка не найдена. Повторите!")
                 return
-            userInfo.okDeskInfo = msg.text
+            userInfo.okDeskInfo = 'shopId=' + msg.text
             userInfo.save()
             
             msgReplay = res['name'] + '\n' + res['address']
@@ -353,7 +353,7 @@ class kbs:
     async def testMenuYesNo(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
         current_menu = userInfo.current_menu.lower()
-
+        # подтверждение доставки
         if current_menu == "menuCorrespondsToAct".lower():
             if msg.text.lower() == "да":
                 msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)

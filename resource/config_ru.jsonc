@@ -239,7 +239,8 @@
 				{
 					"name":"Да",
 					"place":"0",
-					"next":"menuPartnerWithoutIntegration"
+					// "next":"menuPartnerWithoutIntegration"
+					"next":"menuPlaceIdclient"
 				},
 				{
 					"name":"Нет",

@@ -75,9 +75,9 @@
 				}
 			]
 		},
-		// создание заявки
+		// начало работы
 		{
-			"id":"StartReguest",
+			"id":"Start",
 			"title":"answer2",
 			"typeBot":"base",
 			"menu":[
@@ -124,7 +124,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -136,7 +136,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -148,7 +148,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -160,7 +160,8 @@
 				{
 					"name":"Да",
 					"place":"0",
-					"next":"menuPartnerWithoutIntegration"
+					// "next":"menuPartnerWithoutIntegration"
+"next":"menuPlaceIdclient"
 				},
 				{
 					"name":"Нет",
@@ -169,7 +170,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -221,7 +222,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -232,11 +233,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -246,11 +247,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -260,11 +261,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -275,7 +276,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -286,7 +287,7 @@
 			"menu":[
 				{
 					"name":"Завершить обращение",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		}
