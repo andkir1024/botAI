@@ -284,6 +284,9 @@ class kbs:
 
         # проблема с поддержкой
         if current_menu == "menuProblemDo".lower():
+            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
             return
         # ожидание комментарев для сотрудников
         if current_menu == "menuWaitComment".lower():

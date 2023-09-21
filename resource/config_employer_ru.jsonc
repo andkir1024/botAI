@@ -177,19 +177,19 @@
 		// начальное меню чат бота для сотрудников
 		{
 			"id":"Start",
-			"title":"Выберете",
+			"title":"answer4",
 			"menu":[
-				{
-					"name":"Сообщить о проблеме",
-					"next":"menuProblem"
-				},
 				{
 					"name":"Создать заявку",
 					"next":"StartReguest"
 				},
 				{
-					"name":"База данных",
+					"name":"База знаний",
 					"next":"menuDBKnown"
+				},
+				{
+					"name":"Сообщить о проблеме",
+					"next":"menuProblem"
 				},
 				{
 					"name":"Вернуться в начальное меню",
@@ -200,7 +200,7 @@
 		// меню чат бота для сотрудников
 		{
 			"id":"menuProblem",
-			"title":"Выберете",
+			"title":"answer31",
 			"menu":[
 				{
 					"name":"Проблема с поддержкой",
@@ -288,10 +288,10 @@
 			"id":"menuProblemDo",
 			"title":"answer30",
 			"menu":[
-				{
-					"name":"Завершено",
-					"next":"StartFirst"
-				},
+				// {
+				// 	"name":"Завершено",
+				// 	"next":"StartFirst"
+				// },
 				{
 					"name":"Вернуться в начальное меню",
 					"next":"StartFirst"
