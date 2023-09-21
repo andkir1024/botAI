@@ -158,6 +158,7 @@
 		// меню чат бота для клиентов
 		{
 			"id":"menuPlaceIdclientMain",
+			// "photo":"photo_3.png",
 			"title":"answer3",
 			"menu":[
 				{
@@ -494,6 +495,7 @@
 		// меню запрос на гарантийный рез
 		{
 			"id":"menuRequestGaranty",
+			"photo":"image2.png",
 			"title":"answer15",
 			"menu":[
 				{
