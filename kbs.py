@@ -286,7 +286,7 @@ class kbs:
             userInfo.save()
             msgReply = menu.getAssisitans("base", "answer12", userInfo.assistant)
             await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
             
             return
         # 3 подтвердить доставку
@@ -358,12 +358,12 @@ class kbs:
             if msg.text.lower() == "да":
                 msgReply = menu.getAssisitans("base", "answer26", userInfo.assistant)
                 await msg.answer(msgReply)
-                await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
+                await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
                 return True
             if msg.text.lower() == "нет":
                 msgReply = menu.getAssisitans("base", "answer27", userInfo.assistant)
                 await msg.answer(msgReply)
-                await kbs.gotoMenu(msg, menu, 'StartFirstPure', userInfo)
+                await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
                 return True
 
         return False

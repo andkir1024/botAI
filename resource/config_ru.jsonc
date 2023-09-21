@@ -123,7 +123,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -135,7 +135,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -147,7 +147,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -155,31 +155,10 @@
 		// выбор меню запроса вхависимости от типа клинета
 		// меню запроса  и подтверждения места расположения (для номера плоттера)
 
-		// меню чат бота для сотрудников
-		// {
-		// 	"id":"menuPlaceIdemployerMain",
-		// 	"title":"Вы находитесь здесь?",
-		// 	"menu":[
-		// 		{
-		// 			"name":"Да",
-		// 			"place":"0",
-		// 			"next":"menuPlaceIdemployer"
-		// 		},
-		// 		{
-		// 			"name":"Нет",
-		// 			"place":"2",
-		// 			"next":"menuRequestDeviceId"
-		// 		},
-		// 		{
-		// 			"name":"Вернуться в начальное меню",
-		// 			"next":"StartFirstPure"
-		// 		}
-		// 	]
-		// },
 		// меню чат бота для клиентов
 		{
 			"id":"menuPlaceIdclientMain",
-			"title":"Вы находитесь здесь?",
+			"title":"answer3",
 			"menu":[
 				{
 					"name":"Да",
@@ -193,14 +172,14 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
 		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
 		{
 			"id":"menuPlaceIdclientAntiFrodMain",
-			"title":"Вы находитесь здесь?",
+			"title":"answer3",
 			"menu":[
 				{
 					"name":"Да",
@@ -214,14 +193,14 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
 		// меню чат бота для клиентов МВМ и Мегафон (антифрод)
 		{
 			"id":"menuPlaceIdclientIntegrationMain",
-			"title":"Вы находитесь здесь?",
+			"title":"answer3",
 			"menu":[
 				{
 					"name":"Да",
@@ -235,7 +214,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -246,7 +225,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -255,7 +234,7 @@
 		// меню запроса  и подтверждения места расположения (для Точки обслуживания)
 		{
 			"id":"menuShopPlaceId",
-			"title":"Вы находитесь здесь?",
+			"title":"answer3",
 			"menu":[
 				{
 					"name":"Да",
@@ -269,7 +248,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -292,7 +271,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -322,7 +301,7 @@
 		// меню чат бота для МВМ и Мегафон (антифрод)
 		{
 			"id":"menuClientAntiFrod",
-			"title":"меню чат бота для МВМ и Мегафон",
+			"title":"answer301",
 			"menu":[
 				{
 					"name":"Создать новую заявку",
@@ -330,7 +309,7 @@
 				},
 				{
 					"name":"Редактировать существующую заявку",
-					"next":"StartFirstPure"
+					"next":"menuEditRequests"
 				},
 				{
 					"name":"Мой магазин",
@@ -344,14 +323,14 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
 		// меню чат бота для МТС и Билайн (интеграция)
 		{
 			"id":"menuClientIntegration",
-			"title":"меню чат бота для МТС и Билайн",
+			"title":"answer301",
 			"menu":[
 				{
 					"name":"Создать новую заявку",
@@ -359,7 +338,7 @@
 				},
 				{
 					"name":"Редактировать существующую заявку",
-					"next":"StartFirstPure"
+					"next":"menuEditRequests"
 				},
 				{
 					"name":"Мой магазин",
@@ -373,7 +352,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -385,20 +364,20 @@
 				{
 					"name":"Запросить обучение",
 					"id":"requestTraining",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Сотрудник AJ",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"База знаний",
 					"id":"requestDataBase",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -409,11 +388,11 @@
 			"menu":[
 				{
 					"name":"Завершено",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -442,7 +421,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -453,7 +432,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -464,7 +443,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -475,7 +454,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -486,7 +465,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -507,7 +486,7 @@
 				},
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -518,7 +497,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -529,7 +508,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -540,7 +519,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		},
@@ -558,7 +537,7 @@
 		// меню продолжение обращения
 		{
 			"id":"menuContinueRequest",
-			"title":"answdfgdfer5",
+			"title":"answer7",
 			"menu":[
 				{
 					"name":"Завершить обращение",
@@ -594,7 +573,7 @@
 			"menu":[
 				{
 					"name":"Вернуться в начальное меню",
-					"next":"StartFirstPure"
+					"next":"StartFirst"
 				}
 			]
 		}
