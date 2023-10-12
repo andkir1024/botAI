@@ -76,6 +76,10 @@ class kbs:
             return
         # переход к следующему меню
         next_menu = kbs.findNextMenu(menu, msg.text, current_menu, msg, userInfo)
+        # установка режима передачи запроса о поддержке
+        if current_menu == 'menuProblem'.lower():
+            if 'id' in next_menu:
+                userInfo.supportMode = next_menu['id']
         if next_menu is not None:
             if 'next' in next_menu:
                 msgNext = next_menu['next']
@@ -283,10 +287,15 @@ class kbs:
             return
 
         # проблема с поддержкой
+        # support = await kbs.problemMenu(menu, msg, userInfo, current_menu)
+        # if support == True:
+        #     return
         if current_menu == "menuProblemDo".lower():
-            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
-            await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+            support = await kbs.problemMenu(menu, msg, userInfo, current_menu)
+            # await kbs.problemMenu(menu, msg, userInfo, current_menu)
+            # msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            # await msg.answer(msgReply)
+            # await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
             return
         # ожидание комментарев для сотрудников
         if current_menu == "menuWaitComment".lower():
@@ -335,6 +344,30 @@ class kbs:
         await msg.answer("Непонятно")
         return
     
+    async def problemMenu(menu, msg: types.Message, userInfo, current_menu):
+        supportMode = userInfo.supportMode.lower()
+        info = msg.text
+        if supportMode == "menuSupport".lower():
+            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+            return True
+        if supportMode == "menuLogistic".lower():
+            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+            return True
+        if supportMode == "menuWareHouse".lower():
+            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+            return True
+        if supportMode == "menuSoftError".lower():
+            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+            await msg.answer(msgReply)
+            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+            return True
+        return False
     async def sendMediaData(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
         current_menu = userInfo.current_menu.lower()

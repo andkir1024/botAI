@@ -204,20 +204,24 @@
 			"menu":[
 				{
 					"name":"Проблема с поддержкой",
+					"id":"menuSupport",
 					"next":"menuProblemDo"
 				},
 				{
 					"name":"Проблема с логистикой",
 					"place":"0",
+					"id":"menuLogistic",
 					"next":"menuProblemDo"
 				},
 				{
 					"name":"Проблема со складом",
 					"place":"2",
+					"id":"menuWareHouse",
 					"next":"menuProblemDo"
 				},
 				{
 					"name":"Сообщить об ошибке ПО",
+					"id":"menuSoftError",
 					"next":"menuProblemDo"
 				},
 				{

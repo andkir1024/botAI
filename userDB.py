@@ -17,6 +17,7 @@ class user:
     data : str
     userType : str
     counter : int
+    supportMode : str
     # информация выводимая ботом для конкретного пользователя
     infoMode : int
     def __init__(self):
@@ -34,6 +35,7 @@ class user:
         self.userType = userType.client
         self.okDeskUserId = -1
         self.counter = -1
+        self.supportMode = ""
 
     def __init__(self, message : types.Message):
         from_user = message.from_user
@@ -51,6 +53,7 @@ class user:
         self.userType = userType.client
         self.okDeskUserId = -1
         self.counter = -1
+        self.supportMode = ""
         
     def save(self, clearCounter = True):
         if clearCounter:
@@ -73,9 +76,11 @@ class user:
             except:
                 pass
             try:
-                aa = self.counter
+                a0 = self.counter
+                a1 = self.supportMode
             except:
                 exec("self.counter=-1")
+                exec("self.supportMode=''")
             return
         return
 
