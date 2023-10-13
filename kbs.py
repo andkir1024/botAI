@@ -4,6 +4,7 @@ from managerQR import managerQR
 from okDeskUtils import okDesk
 from processorMenu import *
 from aiogram.types import InputFile
+from saveHistory import *
 
 class kbs:
     def get_kb_phone(menu, msg: types.Message) -> ReplyKeyboardMarkup:
@@ -347,26 +348,27 @@ class kbs:
     async def problemMenu(menu, msg: types.Message, userInfo, current_menu):
         supportMode = userInfo.supportMode.lower()
         info = msg.text
-        if supportMode == "menuSupport".lower():
+        if supportMode == "menuSupport".lower() or supportMode == "menuLogistic".lower() or supportMode == "menuWareHouse".lower() or supportMode == "menuSoftError".lower():
+            history.save(userInfo, msg)
             msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
             await msg.answer(msgReply)
             await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
             return True
-        if supportMode == "menuLogistic".lower():
-            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
-            await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
-            return True
-        if supportMode == "menuWareHouse".lower():
-            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
-            await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
-            return True
-        if supportMode == "menuSoftError".lower():
-            msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
-            await msg.answer(msgReply)
-            await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
-            return True
+        # if supportMode == "menuLogistic".lower():
+        #     msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+        #     await msg.answer(msgReply)
+        #     await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+        #     return True
+        # if supportMode == "menuWareHouse".lower():
+        #     msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+        #     await msg.answer(msgReply)
+        #     await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+        #     return True
+        # if supportMode == "menuSoftError".lower():
+        #     msgReply = menu.getAssisitans("base", "answer32", userInfo.assistant)
+        #     await msg.answer(msgReply)
+        #     await kbs.gotoMenu(msg, menu, 'StartFirst', userInfo)
+        #     return True
         return False
     async def sendMediaData(menu, msg: types.Message):
         userInfo, isNew = kbs.getMainUserInfo(msg)
