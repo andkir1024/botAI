@@ -22,37 +22,43 @@ class history:
 
         now = datetime.now() 
         current_time = now.strftime("%Y:%d:%m:%H:%M:%S")
+        current_file_name = now.strftime("%Y_%d_%m")
         
-        xlName = dirHistory + 'example.xlsx'
-        
-        wb = load_workbook(xlName)
-        sheet = wb.get_sheet_by_name('sheet1')
-        c = sheet['A1'].value
-        new_row = ['column1', 'column2', 'column3']
-        sheet.append(new_row)
-        wb.save(xlName)
+        xlName = dirHistory + current_file_name + '.xlsx'
+        # xlName = dirHistory + 'example.xlsx'
+        try:        
+            wb = load_workbook(xlName)
+            sheet = wb.active
+            worker = userInfo.first_name + ' ' + userInfo.last_name
+            request = "Проблема с поддержкой"
+            if supportMode == 'menuLogistic'.lower():
+                request = "Проблема с логистикой"
+            if supportMode == 'menuWareHouse'.lower():
+                request = "Проблема со складом"
+            if supportMode == 'menuSoftError'.lower():
+                request = "Сообщить об ошибке ПО"
+            new_row = [current_time, request, worker, info]
+            sheet.append(new_row)
+            wb.save(xlName)
+        except:
+            my_wb = Workbook()
+            my_sheet = my_wb.active
+            new_row = ['Дата', 'Запрос', 'Сотрудник', 'Сообщение']
+            my_sheet.append(new_row)
+            # my_sheet.column_dimensions['A1'].width = 200
+            my_sheet.append(history.creatRow(current_time, supportMode, userInfo, info))
+            my_wb.save(xlName)
+            pass
         return
         
-        # workbook = load_workbook(filename="sample.xlsx")
-        # workbook.sheetnames
-        # ['Sheet 1']
-        
-        xl = pd.ExcelFile(xlName)
-        df1 = xl.parse(xl.sheet_names)
-        
-        list1 = [10, 20, 30, 40]
-        list2 = [40, 30, 20, 10]
-        col1 = "Дата"
-        col2 = "Сотрудник"
-        col3 = "Сообщение"
-        data = pd.DataFrame({col1: list1, col2: list2})
-        data.to_excel(xlName, sheet_name="sheet1", index=False)
-        # # Указать writer библиотеки
-        # writer = pd.ExcelWriter(xlName, engine='xlsxwriter')
-
-        # # Записать ваш DataFrame в файл     
-        # yourData.to_excel(writer, 'Sheet1')
-
-        # # Сохраним результат 
-        # writer.save()
-        pass
+    def creatRow(current_time, supportMode, userInfo, info):
+        worker = userInfo.first_name + ' ' + userInfo.last_name
+        request = "Проблема с поддержкой"
+        if supportMode == 'menuLogistic'.lower():
+            request = "Проблема с логистикой"
+        if supportMode == 'menuWareHouse'.lower():
+            request = "Проблема со складом"
+        if supportMode == 'menuSoftError'.lower():
+            request = "Сообщить об ошибке ПО"
+        new_row = [current_time, request, worker, info]
+        return new_row
